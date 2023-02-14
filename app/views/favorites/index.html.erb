@@ -1,0 +1,6 @@
+<div class="mt-2 d-grid justify-content-center">
+  <h2><%= t('.title') %></h2>
+</div>
+
+
+<%= turbo_frame_tag :products, src: products_path(favorites: true) %>

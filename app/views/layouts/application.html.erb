@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= t('app_name') %> | <%= t('meta_title') %> Venta de productos por tienda</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <%# <body style="display: grid; min-height: 100vh; grid-template-rows: auto 1fr auto"> %>
+  <body data-controller="tamanno" data-action="resize@window->tamanno#reajustar_tamanno">
+    <!-- Header -->
+    <%= render 'shared/header' %>
+    <!-- Header -->
+    
+    <%= render 'shared/flash' %>
+    <main class="container-lg mx-lg-auto" data-tamanno-target="main">
+      <%= yield %>
+    </main>
+    
+    <!-- Footer -->
+    <%= render 'shared/footer' %>
+    <!-- Footer -->
+  </body>
+</html>

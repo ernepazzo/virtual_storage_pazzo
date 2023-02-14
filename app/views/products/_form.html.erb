@@ -1,0 +1,38 @@
+<div class="card m-2 p-2">
+  <%= form_with model: @product do |form| %>
+    <% @product.errors.full_messages.each do |error| %>
+      <div>
+        <%= error %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :price, class: "form-label" %>
+      <%= form.number_field :price, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :category_id, class: "form-label" %>
+      <%= form.collection_select :category_id, Category.all.order(name: :asc), :id, :name, {}, { class: "form-control" } %>
+    </div>
+
+    <div>
+      <%= form.label :photo, class: "form-label" %>
+      <%= form.file_field :photo, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.submit :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

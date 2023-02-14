@@ -1,0 +1,108 @@
+en:
+  app_name: "VirtualStorage Pazzo"
+  meta_title: "Buy products from a wide variety of businesses"
+  helpers:
+    submit:
+      create: "Crear %{model}"
+      update: "Editar %{model}"
+  shared:
+    items:
+      home: 'Home'
+      products: 'Products'
+      new_product: 'New Product'
+      categories: 'Categories'
+      favorites: 'My Favorites'
+      query_text: 'Search...'
+      login: 'Login'
+      singup: 'Sing-Up'
+      logout: 'Logout'
+    # items_links:
+    # items_search:
+    # items_buttons:
+  authentication:
+    users:
+      create:
+        created: 'Your account has benn created!'
+    sessions:
+      new:
+        login: 'Login'
+      create:
+        created: 'Welcome!'
+        failed: 'Invalid login!'
+      destroy:
+        destroyed: 'Session ended. Bye!'
+  activerecord:
+    models:
+      product: 'Product'
+      category: 'Category'
+      user: 'User'
+    attributes:
+      product:
+        title: 'Title'
+        description: 'Description'
+        price: 'Price'
+        photo: 'Photo'
+      category:
+        name: 'Name'
+      user:
+        email: 'Email'
+        username: 'Username'
+        password: 'Password'
+        whatsapp: 'WhatsApp'
+  common:
+    confirm: 'Are you sure?'
+    back: 'Go Back'
+    not_logged_in: 'You has to login or create an account'
+    not_authorized: 'You don not have permissions for this action'
+    not_found: 'Not found!'
+  products:
+    product:
+      details: 'See Details'
+      view_more_products: 'View more products by "%{username}"'
+      text_me: 'Text me'
+    index:
+      title: 'Products:'
+      new: 'New Product'
+      all: 'All'
+      min_price: 'Min price'
+      max_price: 'Max price'
+      query_text: 'What do you want to search?'
+      expensive: 'Expensive first'
+      cheapest: 'Cheapest first'
+      newest: 'Recently added'
+    edit:
+      title: 'Edit Product'
+    new:
+      title: 'New Product'
+    show:
+      title: 'Product Details'
+      button_edit: 'Edit Product'
+      button_destroy: 'Delete Product'
+      view_more_products: 'View more products of "%{username}"'
+      text_me: 'Text me'
+    create:
+      created: 'Your product has been created successfully'
+    update:
+      updated: 'Your product has been successfully updated'
+    destroy:
+      destroyed: 'Product successfully removed'
+  categories:
+    category:
+      edit: 'Edita'
+      delete: 'Delete'
+    index:
+      title: 'Categories'
+      new: 'Add Category'
+    new:
+      title: 'New Category'
+    edit: 
+      title: 'Edit Category'
+    create:
+      created: 'Your category has been created successfully'
+    update:
+      updated: 'Your category has been successfully updated'
+    destroy:
+      destroyed: 'Your category has been successfully removed'
+  favorites:
+    index:
+      title: 'My Favorites'

@@ -1,0 +1,5 @@
+<div class="mt-2 d-grid justify-content-center">
+  <h2>Listado de productos de: <%= @user.username.capitalize %></h2>
+</div>
+
+<%= turbo_frame_tag :products, src: products_path(user_id: @user.id) %>

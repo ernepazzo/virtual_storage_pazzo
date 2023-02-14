@@ -1,0 +1,11 @@
+<div id="<%= dom_id category %>" class="card text-center m-2 p-2" style="display: flex; align-items: center; justify-content: space-between;">
+  <h4><%= category.name %></h4>   
+
+  <div class="btn-group">
+    <%= link_to t('.edit'), edit_category_path(category), class: 'btn btn-primary mt-2' %>
+    <%= link_to t('.delete'), category_path(category), data: {
+      turbo_method: :delete,
+      turbo_confirm: t('common.confirm')
+    }, class: 'btn btn-danger mt-2' %>
+  </div>
+</div>

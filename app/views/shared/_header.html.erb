@@ -1,0 +1,27 @@
+<header class="p-1 text-bg-dark" data-tamanno-target="header">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center flex-sm-wrap flex-lg-nowrap align-items-sm-center justify-content-sm-center justify-content-lg-start" data-controller="menu">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+         <%= image_tag "logo_virtual_storage_2.png", height: 80, class: "rounded" %>
+      </a>
+
+      <a class="d-sm-none" data-action="click->menu#toggle" style="filter: invert(100%);"><%= image_tag 'icons/menu.svg', width: 45, height: 45 %></a>
+
+      <!-- Menu Escritorio -->
+      <div class="d-none d-sm-block w-100 d-lg-flex justify-content-between align-items-center flex-sm-wrap flex-lg-nowrap align-items-sm-center justify-content-sm-center justify-content-lg-start">
+        <%= render partial: 'shared/items' %>
+      </div>
+      <!-- Menu Escritorio -->
+
+      <!-- Menu Mobile -->
+      <div class="d-none fixed-top w-100 h-100 bg-black bg-opacity-50" data-menu-target="menufondo"></div>
+      <div class="text-bg-dark d-sm-none position-absolute top-0 end-0 h-100 d-flex flex-column overflow-auto p-4 ease-in-out d-none" style="z-index: 1031; min-width: 70%;" data-menu-target="items">
+        <div>
+          <a class="text-end" data-action="click->menu#toggle" style="filter: invert(100%);"><%= image_tag 'icons/close.svg', width: 45, height: 45 %></a>
+          <%= render partial: 'shared/items' %>
+        </div>
+      </div>
+      <!-- Menu Mobile -->
+    </div>
+  </div>
+</header>

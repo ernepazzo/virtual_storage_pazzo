@@ -1,0 +1,108 @@
+es:
+  app_name: "Tienda Virtual Pazzo"
+  meta_title: "Compra productos de una gran variedad de negocios"
+  helpers:
+    submit:
+      create: "Crear %{model}"
+      update: "Editar %{model}"
+  shared:
+    items:
+      home: 'Inicio'
+      products: 'Productos'
+      new_product: 'Añadir Producto'
+      categories: 'Categorías'
+      favorites: 'Mis Favoritos'
+      query_text: 'Buscar...'
+      login: 'Acceso'
+      singup: 'Regístrate'
+      logout: 'Salir'
+    # items_links:
+    # items_search:
+    # items_buttons:
+  authentication:
+    users:
+      create:
+        created: 'Tu cuenta se ha creado!'
+    sessions:
+      new:
+        login: 'Acceso'
+      create:
+        created: 'Bienvenido!'
+        failed: 'Login inválido!'
+      destroy:
+        destroyed: 'Tu sesión ha terminado! Hasta la próxima'
+  activerecord:
+    models:
+      product: 'Producto'
+      category: 'Categoría'
+      user: 'Usuario'
+    attributes:
+      product:
+        title: 'Título'
+        description: 'Descripción'
+        price: 'Precio'
+        photo: 'Foto'
+      category:
+        name: 'Nombre'
+      user:
+        email: 'Correo electrónico'
+        username: 'Usuario'
+        password: 'Contraseña'
+        whatsapp: 'WhatsApp'
+  common:
+    confirm: '¿Estas seguro?'
+    back: 'Ir Atrás'
+    not_logged_in: 'Tienes que hacer login o create una cuenta'
+    not_authorized: 'No tienes permisos para esta acción'
+    not_found: 'No se ha encontrado!'
+  products:
+    product:
+      details: 'Ver Detalles'
+      view_more_products: 'Ver más productos de "%{username}"'
+      text_me: 'Escríbeme'
+    index:
+      title: 'Productos:'
+      new: 'Añadir Producto'
+      all: 'Todos'
+      min_price: 'Precio mínimo'
+      max_price: 'Precio máximo'
+      query_text: '¿Qué quieres buscar?'
+      expensive: 'Más caros'
+      cheapest: 'Más baratos'
+      newest: 'Añadidos recientemente'
+    edit:
+      title: 'Editar Producto'
+    new:
+      title: 'Añadir Producto'
+    show:
+      title: 'Detalles del Producto'
+      button_edit: 'Editar Producto'
+      button_destroy: 'Eliminar Producto'
+      view_more_products: 'Ver más productos de "%{username}"'
+      text_me: 'Escríbeme'
+    create:
+      created: 'Tu producto se ha creado correctamente'
+    update:
+      updated: 'Tu producto se ha actualizado correctamente'
+    destroy:
+      destroyed: 'Tu producto se ha eliminado correctamente'
+  categories:
+    category:
+      edit: 'Editar'
+      delete: 'Eliminar'
+    index:
+      title: 'Categorías'
+      new: 'Añadir Categoría'
+    new:
+      title: 'Nueva Categoría'
+    edit: 
+      title: 'Editar Categoría'
+    create:
+      created: 'Tu categoría se ha creado correctamente'
+    update:
+      updated: 'Tu categoría se ha actualizado correctamente'
+    destroy:
+      destroyed: 'Tu categoría se ha eliminado correctamente'
+  favorites:
+    index:
+      title: 'Mis Favoritos'

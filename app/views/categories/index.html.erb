@@ -1,0 +1,9 @@
+<div style="display: grid; place-items: center">
+  <h1><%= t('.title') %></h1>
+  <%= link_to t('.new'), new_category_path, class: "btn btn-success w-25" %>
+</div>
+
+<div style="width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-auto-rows: minmax(120px, auto);">
+  <%= render partial: 'category', collection: @categories %>
+</div>
+

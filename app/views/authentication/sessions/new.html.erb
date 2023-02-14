@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card m-2 p-2">
+    <%= form_with(url: sessions_path) do |form| %>
+      <div>
+        <%= form.label :login, class: "form-label" %>
+        <%= form.text_field :login, required: true, class: "form-control" %>
+      </div>
+
+      <div>
+        <%= form.label :password, class: "form-label" %>
+        <%= form.password_field :password, required: true, class: "form-control" %>
+      </div>
+
+      <div class="btn-group p-2 m-2">
+        <%= form.submit t('.login'), :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
