@@ -106,3 +106,7 @@ es:
   favorites:
     index:
       title: 'Mis Favoritos'
+  user_mailer:
+    welcome:
+      subject: 'Bienvenido a Tienda Virtual Pazzo'
+      welcome_message: 'Hey %{username}, bienvenido a Tienda Virtual Pazzo. Esperemos que vendas un montón!'
