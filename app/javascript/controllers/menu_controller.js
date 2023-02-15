@@ -5,6 +5,6 @@ export default class extends Controller {
 
   toggle() {
     this.itemsTarget.classList.toggle('d-none')
-    this.menufondoTarget.classList.toggle('d-none')
+    this.menuFondoTarget.classList.toggle('d-none')
   }
 }

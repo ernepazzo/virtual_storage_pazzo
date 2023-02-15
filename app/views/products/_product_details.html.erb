@@ -1,0 +1,8 @@
+<div class="card m-2 p-2" style="display: grid; place-items: center" id="<%= dom_id(product) %>">
+  <h4><%= product.title %></h4>
+  <div style="height: 200px;">
+    <%= image_tag product.photo.attached? ? product.photo : 'placeholder.jpg', class: "object-fit-contain w-100 h-100" %>
+  </div>
+  <p><%= product.description %></p>
+  <span><%= product.price %> CUP</span>
+</div>

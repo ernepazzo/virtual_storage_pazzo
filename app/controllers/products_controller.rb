@@ -32,6 +32,7 @@ class ProductsController < ApplicationController
   def update
     authorize! product
     if product.update(product_params)
+      product.broadcast
       redirect_to products_path, notice: t('.updated')
     else
       render :edit, status: :unprocessable_entity
@@ -56,5 +57,5 @@ class ProductsController < ApplicationController
 
   def product
     @product ||= Product.find(params[:id])
-  end  
+  end
 end

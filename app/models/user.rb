@@ -12,7 +12,7 @@ class User < ApplicationRecord
       with: /\A[a-z0-9A-Z]+\z/,
       message: :invalid
     }
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, if: :password_digest_changed?
   validates :whatsapp, presence: true, uniqueness: true,
     format: {
     # with: /\A\+[0-9]+\z/,
