@@ -1,5 +1,5 @@
 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 d-sm-flex">
-  <li><%= link_to t('.home'), root_path, class: "nav-link px-2 text-white" %>
+  <li><%= link_to t('.home'), root_path, class: "nav-link px-2 text-white" if Current.user&.admin? %>
   </li>
   <li><%= link_to t('.products'), products_path, class: "nav-link px-2 text-white" %></li>
   <li><%= link_to t('.new_product'), new_product_path, class: "nav-link px-2 text-white" if Current.user %>
