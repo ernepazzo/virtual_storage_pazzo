@@ -12,7 +12,7 @@
 /db/*.sqlite3-*
 
 # Fichero de configuración de base de datos
-config/database.yml
+/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*
