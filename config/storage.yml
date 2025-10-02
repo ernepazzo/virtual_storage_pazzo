@@ -17,7 +17,7 @@ tigris:
   secret_access_key: <%= ENV['TIGRIS_SECRET_KEY'] %>
   region: auto
   bucket: <%= ENV['TIGRIS_BUCKET_NAME'] %>
-  force_path_style: true
+  force_path_style: false
 
 
 
