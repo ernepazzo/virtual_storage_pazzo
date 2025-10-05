@@ -1,0 +1,26 @@
+<!--<div class="row">-->
+<!--  <div class="col-12 col-md-12 d-flex justify-content-center">-->
+    <%# if @user.image.present? %>
+      <%#= image_tag @user.image, class: "image-upload" %>
+    <%# else %>
+<!--      <img data-image-preview-target="preview" class="image-upload" src="/unknown.webp" alt="unknown">-->
+    <%# end %>
+<!--  </div>-->
+<!--</div>-->
+
+<!--<hr>-->
+<div class="row">
+  <div class="col-12 col-md-12 d-flex justify-content-center">
+    <h4>Datos Generales</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-12">
+    <p>Correo:
+      <b><%= @user.email %></b> <%= (@user.confirmed? ? '<i class="bi bi-check-all" style="color: green;"></i>' : '<i class="bi bi-x" style="color: red;"></i>').html_safe %>
+    </p>
+  </div>
+  <div class="col-md-6 col-12">
+    <p>Whatsapp: <b><%= @user.whatsapp %></b></p>
+  </div>
+</div>

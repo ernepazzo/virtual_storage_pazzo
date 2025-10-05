@@ -1,0 +1,45 @@
+<div class="app-content mt-3">
+  <div class="container-fluid">
+    <div class="row g-4">
+      <div class="col-12">
+        <div class="card card-primary card-outline mb-4">
+          <div class="card-header"><div class="card-title"><b><span class="bi bi-person-fill-gear"></span> Listado de Usuarios</b></div></div>
+          <div class="card-body">
+            <div data-controller="dataTable">
+              <div id="toolbar">
+<!--                <span style="font-size: 1.5em; font-weight: bold;margin-right: 10px;">Usuarios</span>-->
+                <%# if show_html('admin_access', 'users', 'create') %>
+                  <%#= link_to new_user_path, class: "btn btn-primary" do %>
+                    <span class="bi bi-plus"></span>
+                  <%# end %>
+                <%# end %>
+              </div>
+              <table
+                id="table"
+                data-url="/<%= I18n.locale %>/admin/users/data"
+                data-id-field="id"
+                data-select-item-name="id"
+                data-detail-view="true"
+                data-detail-formatter="detailFormatter"
+                data-show-columns="true"
+                data-search="true"
+              >
+                <thead>
+                <tr>
+                  <!--        <th data-field="id" data-checkbox="true">ID</th>-->
+                  <th data-field="email" data-visible="true" data-switchable="false">Correo electrónico</th>
+                  <th data-field="whatsapp" data-visible="true" data-switchable="true">Whatsapp</th>
+                  <th data-field="admin" data-visible="true" data-switchable="true" data-formatter="iconFormatter">¿Admin?</th>
+                  <th data-field="action" data-width="5" data-width-unit="%" data-visible="true" data-switchable="false" data-align="center"></th>
+                </tr>
+                </thead>
+              </table>
+
+              <%= render 'partials/datatable_component/details_view' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

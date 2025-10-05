@@ -1,0 +1,93 @@
+<script type="text/javascript">
+    function detailFilter(index, row) {
+        if( row.description !== null && row.description.trim() !== '' && row.description !== undefined){
+            return index
+        }
+    }
+
+    function detailFormatter(index, row) {
+        var html = []
+        $.each(row, function (key, value) {
+            if(key === 'description' || key === 'short_description' || key === 'for' || key === 'read_by'|| key === 'permissions'){
+
+                let text = '';
+
+                switch (key) {
+                    case 'short_description':
+                        text = 'Descripción corta';
+                        break;
+                    case 'description':
+                        text = 'Descripción';
+                        break;
+                case 'for':
+                        text = 'Para';
+                        break;
+                case 'read_by':
+                        text = 'Leído por';
+                        break;
+                case 'permissions':
+                        text = 'Permisos';
+                        break;
+                }
+
+                if (typeof value === "object"){
+                    html.push('<span class="table-details-extra"><b> '+text+' :</b> Sin descripción</span><br>');
+                }
+
+                if (typeof value === "string" ) {
+                    if(value.trim() === ''){
+                        html.push('<span class="table-details-extra"><b>'+text+' :</b> Sin descripción</span><br>')
+                    }else{
+                        html.push('<span class="table-details-extra"><b>'+text+' :</b> ' + value + '</span><br>');
+                    }
+
+                }
+            }
+
+        })
+        return html.join('')
+    }
+
+    function detailMembershipFormatter(index, row) {
+        var html = []
+        html.push('<div class="details-extra-membership">');
+        $.each(row, function (key, value) {
+
+                switch (key) {
+                    case 'view_history':
+                        html.push('<div class=""><span class="extra-membership-title">Ver historia :</span>'+value+' </div>')
+                        break;
+                    case 'has_discount':
+                        html.push('<div class=""><span class="extra-membership-title">¿Tiene descuento? :</span>'+value+' </div>')
+                        break;
+                 case 'discount':
+                        html.push('<div class=""><span class="extra-membership-title">Descuento(%) :</span>'+value+' </div>')
+                        break;
+                 case 'search_mark':
+                        html.push('<div class=""><span class="extra-membership-title">Buscar Marca :</span>'+value+' </div>')
+                        break;
+                case 'search_model':
+                        html.push('<div class=""><span class="extra-membership-title">Buscar Modelo :</span>'+value+' </div>')
+                        break;
+                case 'has_free_drivers':
+                        html.push('<div class=""><span class="extra-membership-title">¿Conductor gratis? :</span>'+value+' </div>')
+                        break;
+                case 'free_drivers':
+                        html.push('<div class=""><span class="extra-membership-title">Cuantos :</span>'+value+' </div>')
+                        break;
+                case 'pay_drop_off':
+                        html.push('<div class=""><span class="extra-membership-title">Pago al devolver :</span>'+value+' </div>')
+                        break;
+                case 'delivery_delay':
+                        html.push('<div class=""><span class="extra-membership-title">Retraso de entrega :</span>'+value+' </div>')
+                        break;
+                }
+
+
+
+
+        })
+        html.push('</div>');
+        return html.join('')
+    }
+</script>
