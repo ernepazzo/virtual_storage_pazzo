@@ -41,3 +41,5 @@
 !/app/assets/builds/.keep
 
 /node_modules
+.idea/
+/test/controllers/admin/users_controller_test.rb
