@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-  skip_before_action :protect_pages, only: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]   # Opcional: solo usuarios logueados
+  before_action :is_admin?, except: [:index, :show]
+  before_action :protect_pages, except: [:index, :show]
 
   def index
     @categories = Category.order(name: :asc).load_async
@@ -17,6 +19,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.user = current_user
 
     if @product.save
       redirect_to products_path, notice: t('.created')

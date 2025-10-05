@@ -50,7 +50,7 @@ gem "bootsnap", require: false
 gem "pagy", "~> 6.0"
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -70,6 +70,8 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  gem 'pry'
+  gem 'annotate'
   gem "letter_opener"
 end
 
@@ -82,4 +84,11 @@ end
 
 gem "view_component", "~> 2.82"
 
+# Para el storage en la nube con AWS S3 (Tigris)
 gem "aws-sdk-s3"
+
+gem 'devise'
+gem 'paranoia'
+
+# Adminisración
+# gem 'administrate'

@@ -9,6 +9,7 @@ default: &default
 development:
   <<: *default
   database: virtual_storage_pazzo_development
+#  database: virtual_storage_pazzo_development_1
 production:
   adapter: postgresql
   encoding: unicode

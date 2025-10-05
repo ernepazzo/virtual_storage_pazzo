@@ -8,14 +8,16 @@ es:
   shared:
     items:
       home: 'Inicio'
+      administration: 'Administración'
       products: 'Productos'
       new_product: 'Añadir Producto'
       categories: 'Categorías'
       favorites: 'Mis Favoritos'
       query_text: 'Buscar...'
       login: 'Acceso'
-      singup: 'Regístrate'
+      sing_up: 'Regístrate'
       logout: 'Salir'
+      profile: 'Perfil'
     # items_links:
     # items_search:
     # items_buttons:
@@ -110,3 +112,6 @@ es:
     welcome:
       subject: 'Bienvenido a Tienda Virtual Pazzo'
       welcome_message: 'Hey %{username}, bienvenido a Tienda Virtual Pazzo. Esperemos que vendas un montón!'
+  admin:
+    layout:
+      member_since: 'Miembro desde'

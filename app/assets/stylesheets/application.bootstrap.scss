@@ -1,5 +1,17 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+@import 'bootstrap-table/dist/bootstrap-table.min';
+@import 'bootstrap-slider/src/sass/bootstrap-slider';
+
+@import '@fortawesome/fontawesome-free/css/all.min';
+
+// Bootstrap Table
+//@import "../node_modules/bootstrap-table/dist/bootstrap-table.min.css";
+//@import "../node_modules/bootstrap-slider/src/sass/bootstrap-slider.scss";
+
+// Select2
+//@import "select2/dist/css/select2.min";
+//@import "select2-bootstrap-theme/dist/select2-bootstrap.min";
 
 // CSS propio para cosas puntuales
 @import 'my_css';

@@ -14,10 +14,11 @@ class Product < ApplicationRecord
   validates :price, presence: true
 
   belongs_to :category
-  belongs_to :user, default: -> { Current.user } # para asignar de manera predeterminada al usuario logeado el producto
+  # belongs_to :user, default: -> { Current.user } # para asignar de manera predeterminada al usuario logeado el producto
+  belongs_to :user
 
   def owner?
-    user_id == Current.user&.id
+    user_id == user&.id
   end
 
   def broadcast

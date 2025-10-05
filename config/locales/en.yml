@@ -8,14 +8,16 @@ en:
   shared:
     items:
       home: 'Home'
+      administration: 'Administration'
       products: 'Products'
       new_product: 'New Product'
       categories: 'Categories'
       favorites: 'My Favorites'
       query_text: 'Search...'
       login: 'Login'
-      singup: 'Sing-Up'
+      sing_up: 'Sing Up'
       logout: 'Logout'
+      profile: 'Profile'
     # items_links:
     # items_search:
     # items_buttons:
@@ -110,3 +112,6 @@ en:
     welcome:
       subject: 'Welcome to VirtualStorage Pazzo'
       welcome_message: 'Hey %{username}, welcome to VirtualStorage Pazzo. We hope you sell a lot!'
+  admin:
+    layout:
+      member_since: 'Member since'

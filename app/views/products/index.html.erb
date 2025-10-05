@@ -1,7 +1,7 @@
 <%= turbo_frame_tag 'home' do %>
   <div class="grid text-center">
     <h2><%= t('.title') %></h2>
-    <%= link_to t('.new'), new_product_path, class: "btn btn-success w-25-sm m-1" if Current.user %>
+    <%= link_to t('.new'), new_product_path, class: "btn btn-success w-25-sm m-1" if current_user %>
 
     <%= form_with url: products_path, method: :get do |form| %>
       <%= form.text_field :query_text, placeholder: t('.query_text'), onChange: 'this.form.requestSubmit()', value: params[:query_text], class: 'form-control my-2 rounded' %>

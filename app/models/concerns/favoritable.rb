@@ -5,7 +5,7 @@ module Favoritable
     has_many :favorites, dependent: :destroy
     
     def favorite!
-      favorites.create(user: Current.user)
+      favorites.create(user: user)
     end
   
     def unfavorite!
@@ -13,7 +13,7 @@ module Favoritable
     end
   
     def favorite
-      favorites.find_by(user: Current.user)    
+      favorites.find_by(user: user)
     end        
   end
 end

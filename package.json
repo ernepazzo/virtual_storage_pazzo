@@ -2,17 +2,28 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.5",
-    "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.3",
+    "@popperjs/core": "^2.11.8",
+    "admin-lte": "4.0.0-rc3",
+    "bootbox": "^6.0.4",
+    "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.10.3",
+    "bootstrap-slider": "^11.0.2",
+    "bootstrap-table": "^1.24.2",
     "esbuild": "^0.17.5",
     "esbuild-rails": "^1.0.3",
-    "sass": "^1.58.0"
+    "highcharts": "^12.4.0",
+    "i18n-js": "^4.5.1",
+    "jquery": "^3.7.1",
+    "sass": "^1.58.0",
+    "select2": "^4.1.0-rc.0",
+    "select2-bootstrap-theme": "^0.1.0-beta.10",
+    "toastr": "^2.1.4"
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css ./app/assets/stylesheets/admin.scss:./app/assets/builds/admin.css --no-source-map --load-path=node_modules"
   }
 }

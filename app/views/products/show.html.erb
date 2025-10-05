@@ -4,9 +4,10 @@
   <%= render partial: 'products/product_details', locals: { product: @product } %>
 
   <div class="d-grid gap-2 mx-auto mt-2">
-    <%= link_to t('.view_more_products', username: @product.user.username.capitalize), user_path(@product.user.username), class: "btn btn-success mb-2" %>
-    
-    <%= link_to "https://api.whatsapp.com/send?phone=+#{@product.user.whatsapp}&text=%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F%20*Virtual%20Storage%20Pazzo*%20%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F%0A%60%60%60Buenas%20quiero%20comprar%60%60%60%20%F0%9F%93%8B%0A%20%20%20%20*#{@product.title}*%0A%20%20%20%20%20%20%20%20#{@product.description}%0A%20%20%20%20*110%20CUP*%0A_Saludos%20y%20espero%20respuesta...._%0A_Visita%20nuestra%20web%20para%20conocer%20m%C3%A1s%20%F0%9F%91%89%20http://localhost:3000_%0A%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F%20*Virtual%20Storage%20Pazzo*%20%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F", :target => "_blank", class: "text-center" do %>
+    <%#= link_to t('.view_more_products', username: @product.user.username.capitalize), user_path(@product.user.username), class: "btn btn-success mb-2" %>
+    <%= link_to t('.view_more_products', username: @product.user.email.capitalize), user_path(username: @product.user.id), class: "btn btn-success mb-2" %>
+
+    <%= link_to "https://api.whatsapp.com/send?phone=+#{@product&.user&.whatsapp}&text=%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F%20*Virtual%20Storage%20Pazzo*%20%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F%0A%60%60%60Buenas%20quiero%20comprar%60%60%60%20%F0%9F%93%8B%0A%20%20%20%20*#{@product.title}*%0A%20%20%20%20%20%20%20%20#{@product.description}%0A%20%20%20%20*110%20CUP*%0A_Saludos%20y%20espero%20respuesta...._%0A_Visita%20nuestra%20web%20para%20conocer%20m%C3%A1s%20%F0%9F%91%89%20http://localhost:3000_%0A%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F%20*Virtual%20Storage%20Pazzo*%20%F0%9F%9B%92%F0%9F%9B%8D%EF%B8%8F", :target => "_blank", class: "text-center" do %>
       <button id="button_send_whatsapp">
         <p><%= t('.text_me') %></p>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -18,8 +19,8 @@
     <%= render partial: 'favorite', locals: { product: @product } %>
 
     <div class="btn-group">
-      <%= link_to t('.button_edit'), edit_product_path(@product.id), class: "btn btn-primary" if @product.owner? %>
-      <%= link_to t('.button_destroy'), product_path(@product.id), class: "btn btn-danger", data: {
+      <%= link_to t('.button_edit'), edit_product_path(id: @product.id), class: "btn btn-primary" if @product.owner? %>
+      <%= link_to t('.button_destroy'), product_path(id: @product.id), class: "btn btn-danger", data: {
         turbo_method: :delete,
         turbo_confirm: t('common.confirm')
       } if @product.owner? %>

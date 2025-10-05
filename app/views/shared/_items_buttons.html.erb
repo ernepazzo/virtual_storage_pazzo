@@ -1,8 +1,8 @@
 <div class="text-end">
-  <%= link_to t('.login'), new_session_path, class: "btn btn-outline-light me-2"  unless Current.user %>
-  <%= link_to t('.singup'), new_user_path, class: "btn btn-warning"  unless Current.user %>
-  <%= link_to t('.logout'), session_path(Current.user.id), data: {
+  <%= link_to t('.login'), login_path, class: "btn btn-outline-light me-2"  unless current_user %>
+  <%= link_to t('.sing_up'), register_path, class: "btn btn-warning"  unless current_user %>
+  <%= link_to t('.logout'), logout_path(current_user.id), data: {
     turbo_method: :delete,
     turbo_confirm: t('common.confirm')
-  }, class: "btn btn-outline-light me-2" if Current.user %>
+  }, class: "btn btn-outline-light me-2" if current_user %>
 </div>

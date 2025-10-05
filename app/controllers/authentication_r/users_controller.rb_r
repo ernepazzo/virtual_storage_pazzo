@@ -1,4 +1,4 @@
-class Authentication::UsersController < ApplicationController
+class Authentication_r::UsersController < ApplicationController
   skip_before_action :protect_pages
 
   def new
