@@ -1,8 +1,17 @@
-// Importa Bootstrap
+// 2. Bootstrap (desde SCSS, no desde CSS)
 @import "bootstrap/scss/bootstrap";
-@import 'bootstrap-icons/font/bootstrap-icons'; // Bootstrap Icons
-@import 'bootstrap-table/dist/bootstrap-table.min';
-@import 'bootstrap-slider/src/sass/bootstrap-slider';
+
+// 3. Bootstrap Icons (desde SCSS o CSS, pero usa ruta correcta)
+@import "bootstrap-icons/font/bootstrap-icons";
+
+// 4. Bootstrap Table
+@import "bootstrap-table/src/bootstrap-table"; // usa src/scss, no dist/
+
+// 5. OverlayScrollbars (usa la versión SCSS si existe, o fallback a CSS)
+@import "overlayscrollbars/styles/overlayscrollbars"; // sin .min
+
+// 6. AdminLTE — ¡DESCOMENTA ESTO!
+//@import "admin-lte/build/scss/AdminLTE"; // o "admin-lte/src/scss/adminlte"
 
 @import '@fortawesome/fontawesome-free/css/all.min';
 
@@ -10,7 +19,7 @@
 @import "overlayscrollbars/styles/overlayscrollbars.min"; // OverlayScrollbars
 
 // Importa AdminLTE
-//@import "admin-lte/src/scss/adminlte";
+@import "admin-lte/src/scss/adminlte";
 //@import "./admin/adminlte.min";
 
 // Opcional: personaliza variables de Bootstrap o AdminLTE aquí

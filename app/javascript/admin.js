@@ -11,9 +11,9 @@ import * as bootstrap from "bootstrap";
 window.bootstrap = bootstrap;
 import "bootstrap-table/dist/bootstrap-table.min.js"
 import "bootstrap-table/dist/locale/bootstrap-table-es-ES.min.js" // idioma opcional
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap-table/dist/bootstrap-table.min.css"
-import 'bootstrap-icons/font/bootstrap-icons.css';
+// import "bootstrap/dist/css/bootstrap.min.css"
+// import "bootstrap-table/dist/bootstrap-table.min.css"
+// import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import bootbox from "bootbox"
 window.bootbox = bootbox
@@ -21,11 +21,11 @@ import toastr from "toastr"
 window.toastr = toastr;
 
 // Carga AdminLTE CSS y JS
-import 'admin-lte/dist/css/adminlte.min.css';
+// import 'admin-lte/dist/css/adminlte.min.css';
 import 'admin-lte/dist/js/adminlte.min.js';
 
 // OverlayScrollbars JS y CSS
-import 'overlayscrollbars/styles/overlayscrollbars.css';
+// import 'overlayscrollbars/styles/overlayscrollbars.css';
 import { OverlayScrollbars } from 'overlayscrollbars';
 
 // Hazlo global si lo necesitas en otros scripts
