@@ -13,19 +13,37 @@ import "bootstrap-table/dist/bootstrap-table.min.js"
 import "bootstrap-table/dist/locale/bootstrap-table-es-ES.min.js" // idioma opcional
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap-table/dist/bootstrap-table.min.css"
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import bootbox from "bootbox"
 window.bootbox = bootbox
 import toastr from "toastr"
 window.toastr = toastr;
 
-// Carga AdminLTE
-// import "admin-lte/dist/js/adminlte.min.js"
-// import "./admin/adminlte.min.js"
-// import "./admin/adminlte.min.css"
-
+// Carga AdminLTE CSS y JS
 import 'admin-lte/dist/css/adminlte.min.css';
 import 'admin-lte/dist/js/adminlte.min.js';
+
+// OverlayScrollbars JS y CSS
+import 'overlayscrollbars/styles/overlayscrollbars.css';
+import { OverlayScrollbars } from 'overlayscrollbars';
+
+// Hazlo global si lo necesitas en otros scripts
+window.OverlayScrollbars = OverlayScrollbars;
+
+/*document.addEventListener('DOMContentLoaded', () => {
+    const sidebarWrapper = document.querySelector('.sidebar-wrapper');
+    if (sidebarWrapper) {
+        OverlayScrollbars(sidebarWrapper, { /!* opciones *!/ });
+    }
+});*/
+import '@popperjs/core'; // Popper.js (Bootstrap lo usa internamente)
+
+// import './admin/jsdelivr/index.css'
+// import './admin/jsdelivr/overlayscrollbars.min.css'
+// import './admin/jsdelivr/bootstrap-icons.min.css'
+// import './admin/jsdelivr/overlayscrollbars.browser.es6.min'
+// import './admin/jsdelivr/popper.min'
 
 // Opcional: reiniciar plugins de AdminLTE tras navegación Turbo
 document.addEventListener("turbo:load", () => {

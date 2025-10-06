@@ -19,6 +19,11 @@ const entryPoints = ["application.js", "admin.js"]
 const config = {
     ...baseConfig,
     entryPoints,
+    loader: {
+        '.woff': 'file',
+        '.woff2': 'file',
+        '.ttf': 'file'
+    }
 }
 
 if (watch) {

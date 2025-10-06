@@ -1,10 +1,13 @@
 // Importa Bootstrap
 @import "bootstrap/scss/bootstrap";
-@import 'bootstrap-icons/font/bootstrap-icons';
+@import 'bootstrap-icons/font/bootstrap-icons'; // Bootstrap Icons
 @import 'bootstrap-table/dist/bootstrap-table.min';
 @import 'bootstrap-slider/src/sass/bootstrap-slider';
 
 @import '@fortawesome/fontawesome-free/css/all.min';
+
+@import "@fontsource/source-sans-3"; // Fuente
+@import "overlayscrollbars/styles/overlayscrollbars.min"; // OverlayScrollbars
 
 // Importa AdminLTE
 //@import "admin-lte/src/scss/adminlte";

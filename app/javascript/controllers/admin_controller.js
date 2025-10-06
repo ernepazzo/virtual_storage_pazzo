@@ -9,6 +9,10 @@ import toastr from "toastr"
 import * as bootstrap from "bootstrap"
 window.bootstrap = bootstrap
 
+// OverlayScrollbars JS
+import { OverlayScrollbars } from 'overlayscrollbars';
+
+
 export default class extends Controller {
     connect() {
         // ======================================================
@@ -17,10 +21,24 @@ export default class extends Controller {
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper"
         const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER)
 
-        if (sidebarWrapper && window.OverlayScrollbarsGlobal?.OverlayScrollbars) {
+        /*if (sidebarWrapper && window.OverlayScrollbarsGlobal?.OverlayScrollbars) {
             // evita reinicializar si ya está activo
             if (!sidebarWrapper.dataset.scrollInit) {
                 this.scrollbar = OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: "os-theme-light",
+                        autoHide: "leave",
+                        clickScroll: true,
+                    },
+                })
+                sidebarWrapper.dataset.scrollInit = "true"
+                console.log("✅ OverlayScrollbars inicializado")
+            }
+        }*/
+        if (sidebarWrapper && OverlayScrollbars) {
+            // evita reinicializar si ya está activo
+            if (!sidebarWrapper.dataset.scrollInit) {
+                this.scrollbar = OverlayScrollbars(sidebarWrapper, {
                     scrollbars: {
                         theme: "os-theme-light",
                         autoHide: "leave",
