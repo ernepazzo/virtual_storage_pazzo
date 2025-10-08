@@ -70,6 +70,9 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  # Alertas de GitHub
+  gem "rack", ">= 2.2.19"
+
   gem 'pry'
   gem 'annotate'
   gem "letter_opener"

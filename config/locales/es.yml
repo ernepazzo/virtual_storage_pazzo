@@ -51,6 +51,8 @@ es:
         username: 'Usuario'
         password: 'Contraseña'
         whatsapp: 'WhatsApp'
+        list_user: 'Listado de Usuarios'
+        registered_users: 'Usuarios registrados'
   common:
     confirm: '¿Estas seguro?'
     back: 'Ir Atrás'

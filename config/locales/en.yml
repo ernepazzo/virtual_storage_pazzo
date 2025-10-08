@@ -51,6 +51,8 @@ en:
         username: 'Username'
         password: 'Password'
         whatsapp: 'WhatsApp'
+        list_user: 'User List'
+        registered_users: 'Registered Users'
   common:
     confirm: 'Are you sure?'
     back: 'Go Back'
