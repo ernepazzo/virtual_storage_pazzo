@@ -31,6 +31,18 @@ Rails.application.routes.draw do
       get '/users/:id/perfil', to: 'users#show', as: 'user_show'
       get '/users/:id/edit', to: 'users#edit', as: 'users_edit'
       post '/users/:id/update', to: 'users#update', as: 'users_update'
+
+      # Entity Business
+      get '/entity_business/data'
+      get '/entity_business', to: 'entity_business#index', as: 'entity_business'
+      get '/entity_business/data', to: 'entity_business#data'
+      get '/entity_business/:id/show', to: 'entity_business#show', as: 'entity_business_show'
+      get '/entity_business/new', to: 'entity_business#new', as: 'entity_business_new'
+      post '/entity_business', to: 'entity_business#create', as: 'entity_business_create'
+      get '/entity_business/:id/delete', to: 'entity_business#destroy', as: 'entity_business_delete'
+      get '/entity_business/:id/edit', to: 'entity_business#edit', as: 'entity_business_edit'
+      put '/entity_business/:id/update', to: 'entity_business#update', as: 'entity_business_update'
+      post '/entity_business/delete', to: 'entity_business#destroy_block'
     end
 
     resources :favorites, only: [:index, :create, :destroy], param: :product_id

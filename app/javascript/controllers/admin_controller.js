@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import {Controller} from "@hotwired/stimulus"
 
 // 1️⃣ Importa jQuery globalmente
 import jQuery from "jquery"
@@ -10,7 +10,22 @@ import * as bootstrap from "bootstrap"
 window.bootstrap = bootstrap
 
 // OverlayScrollbars JS
-import { OverlayScrollbars } from 'overlayscrollbars';
+import {OverlayScrollbars} from 'overlayscrollbars';
+
+let obtenerIdCheckDatatable = () => {
+    let array = []
+    let input = $('#table').find('input[type="checkbox"]');
+    input.map(elem => {
+        let check = $(input[elem]);
+        if (check.is(':checked')) {
+            if (check.val() !== 'on') {
+                array.push(check.val());
+            }
+        }
+
+    })
+    return array;
+}
 
 
 export default class extends Controller {
@@ -164,5 +179,97 @@ export default class extends Controller {
                 showActiveTheme(theme, true)
             })
         })
+    }
+
+    delete(e) {
+        bootbox.confirm({
+            title: 'Eliminar',
+            message: "¿Seguro que desea eliminar este elemento?",
+            buttons: {
+                confirm: {
+                    label: '<i class="bi bi-check-lg"></i> Aceptar',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: '<i class="bi bi-x-lg"></i> Cancelar',
+                    className: 'btn-secondary'
+                }
+            },
+            size: 'md',
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: e.target.dataset.target,
+                        data: {
+                            format: 'json'
+                        },
+                        type: 'GET',
+                        success: function (data) {
+                            if (data.success) {
+                                toastr.success(data.msg);
+                                $('#table').bootstrapTable('refresh');
+                            } else {
+                                toastr.error(data.msg);
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    blockDelete() {
+        let ids = obtenerIdCheckDatatable();
+
+        let count_id = ids.length;
+
+        console.info('mi info!!!!');
+        console.log(ids);
+        console.log(count_id);
+
+        if (count_id === 0) {
+            toastr.info('Debe seleccionar al menos un elemento de la tabla para eliminar', 'Información importante');
+        }
+
+        if (count_id > 0) {
+            bootbox.confirm({
+                title: 'Eliminar',
+                message: `¿Seguro que desea eliminar estos ${count_id} elemento(s)?`,
+                buttons: {
+                    confirm: {
+                        label: '<i class="bi bi-check-lg"></i> Aceptar',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '<i class="bi bi-x-lg"></i> Cancelar',
+                        className: 'btn-secondary'
+                    }
+                },
+                size: 'md',
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: `${location.href.split('?')[0]}/delete`,
+                            data: {
+                                format: 'json',
+                                ids: ids
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: 'POST',
+                            success: function (data) {
+                                if (data.success) {
+                                    toastr.success(data.msg);
+                                    $('#table').bootstrapTable('refresh');
+                                } else {
+                                    toastr.error(data.msg);
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        }
     }
 }

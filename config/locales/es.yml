@@ -38,6 +38,7 @@ es:
       product: 'Producto'
       category: 'Categoría'
       user: 'Usuario'
+      entity_business: 'Empresa o Negocio'
     attributes:
       product:
         title: 'Título'

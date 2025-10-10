@@ -38,7 +38,7 @@ class Admin::UsersController < ApplicationController
       #   end
       # end
 
-      if current_user.email == "ernepazzo1212@gmail.com" && user.confirmed_at.nil?
+      if (current_user.email == "ernepazzo1212@gmail.com" || current_user.email == "livanmay27@gmail.com" || current_user.email == "duniaosorio88@gmail.com") && user.confirmed_at.nil?
         action += "<a class='dropdown-item' href='/admin/users/#{user.id}/validate'><span class='icon-check text-success'></span> Validar</a>"
       end
 
@@ -49,9 +49,9 @@ class Admin::UsersController < ApplicationController
       #          end
 
       admin = if user.admin
-                '<span class="bi bi-check text-success">'
+                '<span class="bi bi-check-lg text-success">'
               else
-                '<span class="bi bi-times text-danger">'
+                '<span class="bi bi-x-lg text-danger">'
               end
 
       # commercial = if user.is_commercial

@@ -93,5 +93,11 @@ gem "aws-sdk-s3"
 gem 'devise'
 gem 'paranoia'
 
+gem 'money-rails'
+gem 'money'
+
+gem "image_processing"
+gem 'mini_magick'
+
 # Adminisración
 # gem 'administrate'
