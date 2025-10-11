@@ -39,6 +39,7 @@ es:
       category: 'Categoría'
       user: 'Usuario'
       entity_business: 'Empresa o Negocio'
+      warehouse: 'Almacén'
     attributes:
       product:
         title: 'Título'

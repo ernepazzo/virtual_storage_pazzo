@@ -39,6 +39,7 @@ en:
       category: 'Category'
       user: 'User'
       entity_business: 'Company or Business'
+      warehouse: 'Warehouse'
     attributes:
       product:
         title: 'Title'

@@ -25,7 +25,7 @@ class Admin::EntityBusinessController < ApplicationController
       # binding.pry
       rows.push(
         id: "<input type='checkbox' value='#{entity_business.id}' class='inputBtnDataTable'>",
-        image: entity_business.image.present? ? "<div style='text-align: center;'><img src='#{url_for entity_business.image}' class='avatar img-fluid rounded me-1' alt=''></div>" : "",
+        image: "<div style='text-align: center;'><img src='#{entity_business.image.present? ? url_for(entity_business.image) : url_for('/no_images_200_x_200.png')}' class='avatar img-fluid rounded me-1' alt=''></div>",
         name: entity_business.name,
         code: entity_business.code,
         description: entity_business.description,
@@ -127,7 +127,6 @@ class Admin::EntityBusinessController < ApplicationController
 
     count = 0
     params[:ids].each do |id|
-      binding.pry
       entity_business = EntityBusiness.find id
       if entity_business.present?
         count += 1

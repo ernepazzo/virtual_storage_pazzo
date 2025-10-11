@@ -13,15 +13,15 @@
 
   <div class="d-flex flex-column justify-content-center align-items-center">
     <div class="div-image-preview">
-      <% if entity_business.image.attached? && entity_business.image.persisted? %>
-        <%= image_tag entity_business.image, data: { image_preview_target: "preview" }, class: "image-upload" %>
+      <% if warehouse.image.attached? && warehouse.image.persisted? %>
+        <%= image_tag warehouse.image, data: { image_preview_target: "preview" }, class: "image-upload" %>
     <% else %>
         <%= image_tag "", data: { image_preview_target: "preview" }, class: "image-upload" %>
     <% end %>
     </div>
 
     <div class="d-flex flex-row justify-content-center">
-      <button for="entity_business_image" class="btn btn-primary" style="border-radius: 10px;" type="button" data-id="entity_business_image" data-action="click->image-preview#loadInputFile">Cambiar Imagen</button>
+      <button for="warehouse_image" class="btn btn-primary" style="border-radius: 10px;" type="button" data-id="warehouse_image" data-action="click->image-preview#loadInputFile">Cambiar Imagen</button>
     </div>
   </div>
 </div>
