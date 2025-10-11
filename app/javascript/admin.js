@@ -6,6 +6,8 @@ import "./controllers"
 import jQuery from "jquery";
 window.$ = window.jQuery = jQuery;
 
+import 'jquery-ujs'
+
 // Bootstrap 5 (requiere Popper)
 import * as bootstrap from "bootstrap";
 window.bootstrap = bootstrap;

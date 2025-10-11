@@ -92,7 +92,7 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "admin", "data-turbo-track": "reload", defer: true %>
+  <%= javascript_include_tag "admin", "data-turbo-track": "reload" %>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -408,6 +408,27 @@
               <p><%= t('activerecord.models.user') %></p>
             <% end %>
           </li>
+          <li class="nav-item">
+            <%= link_to admin_entity_business_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-building"></i>
+              <p><%= t('activerecord.models.entity_business') %></p>
+            <% end %>
+          </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <li class="nav-header">OTRAS COSAS POR QUITAR</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -1024,6 +1045,16 @@
 <!--end::Bootstrap Toasts-->
 <!--end::Script-->
 <%= turbo_frame_tag 'remote_modal' %>
+<%#= javascript_include_tag "global/jsColorPicker.min.js", 'data-turbo-track': 'reload' %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        <% if flash.present?%>
+        <%flash.each do |f| %>
+        toastr["<%=f[0] %>"]("<%=f[1] %>")
+        <%end %>
+        <%end %>
+    })
+</script>
 </body>
 <!--end::Body-->
 </html>

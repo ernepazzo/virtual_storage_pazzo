@@ -53,7 +53,7 @@ export default class extends Controller {
             sidePagination: "server",
             showRefresh: true,
             pageSize: 10,
-            // pageList: [10, 25, 50, 100, 200, 'All'],
+            pageList: [10, 25, 50, 100, 200, 'All'],
             toolbar: '#toolbar',
             toolbarAlign: "left",
             idField: "id",
@@ -62,7 +62,7 @@ export default class extends Controller {
             showToggle: true,
             selectItemName: "id",
             onLoadSuccess: function (data) {
-                table.bootstrapTable('checkInvert');
+                table.bootstrapTable('uncheckAll');
             }
         });
 
@@ -196,6 +196,10 @@ export default class extends Controller {
                 }
             }
         })
+    }
+
+    checkUncheckAll(e) {
+        $('.inputBtnDataTable').prop('checked', $(e.target).is(':checked'));
     }
 
     /* Para Hotetec */
