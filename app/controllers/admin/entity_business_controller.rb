@@ -92,8 +92,9 @@ class Admin::EntityBusinessController < ApplicationController
     else
       @url = admin_entity_business_update_path(id: @entity_business.id)
       @url_method = 'PUT'
-      flash[:warning] = "No se ha podido editar le Empresa o Negocio."
-      redirect_to admin_entity_business_edit_path(id: @entity_business.id)
+      render :edit, status: :unprocessable_entity
+      # flash[:warning] = "No se ha podido editar le Empresa o Negocio."
+      # redirect_to admin_entity_business_edit_path(id: @entity_business.id)
     end
   end
 

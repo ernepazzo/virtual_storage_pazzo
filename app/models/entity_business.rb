@@ -33,6 +33,7 @@ class EntityBusiness < ApplicationRecord
   def validate_image_size
     if image.attached? && image.blob.byte_size > 500.kilobytes
       errors.add(:image, 'El avatar no puede superar los 500kb de almacenamiento.')
+      image = nil
     end
   end
 
