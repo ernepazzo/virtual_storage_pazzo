@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_11_001756) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_12_020053) do
+  create_table "accesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.boolean "can_create", default: false
+    t.boolean "can_edit", default: false
+    t.boolean "can_show", default: false
+    t.boolean "can_delete", default: false
+    t.boolean "can_other", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "permission_id", null: false
+    t.index ["permission_id"], name: "index_accesses_on_permission_id"
+  end
+
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,16 +75,41 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_11_001756) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "permissions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "permission_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.integer "price", null: false
+    t.bigint "category_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "category_id", null: false
-    t.bigint "user_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "role_has_accesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "access_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["access_id"], name: "index_role_has_accesses_on_access_id"
+    t.index ["role_id"], name: "index_role_has_accesses_on_role_id"
+  end
+
+  create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "role_type"
+    t.boolean "admin_access", default: false
+    t.integer "priority", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_default", default: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -98,30 +135,34 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_11_001756) do
     t.datetime "deleted_at"
     t.string "whatsapp"
     t.boolean "admin"
+    t.bigint "role_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "users_r", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "username", null: false
-    t.string "password_digest", null: false
-    t.string "whatsapp", null: false
+  create_table "warehouses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "description"
+    t.bigint "entity_business_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin", default: false
-    t.string "country"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
+    t.index ["entity_business_id"], name: "index_warehouses_on_entity_business_id"
   end
 
+  add_foreign_key "accesses", "permissions"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "products"
-  add_foreign_key "favorites", "users_r", column: "user_id"
+  add_foreign_key "favorites", "users"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "users_r", column: "user_id"
+  add_foreign_key "products", "users"
+  add_foreign_key "role_has_accesses", "accesses"
+  add_foreign_key "role_has_accesses", "roles"
+  add_foreign_key "users", "roles"
+  add_foreign_key "warehouses", "entity_businesses"
 end

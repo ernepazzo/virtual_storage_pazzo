@@ -25,6 +25,7 @@
 #  whatsapp               :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role_id                :bigint
 #
 # Indexes
 #
@@ -32,7 +33,12 @@
 #  index_users_on_deleted_at            (deleted_at)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_role_id               (role_id)
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (role_id => roles.id)
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -51,4 +57,26 @@ class User < ApplicationRecord
 
   has_many :products, dependent: :destroy
   has_many :favorites, dependent: :destroy
+
+  belongs_to :role
+
+  def access_and_permissions
+    role_access = RoleHasAccess.where(role_id: role&.id)
+    access_permissions = {}
+    if role_access.count > 0
+      role_access.each do |ra|
+        if ra.access.can_show || ra.access.can_create || ra.access.can_edit || ra.access.can_delete || ra.access.can_other
+          access_permissions[ra.access.permission.permission_type] = {
+            show: ra.access.can_show,
+            create: ra.access.can_create,
+            edit: ra.access.can_edit,
+            delete: ra.access.can_delete,
+            other: ra.access.can_other,
+          }
+        end
+      end
+    end
+
+    access_permissions
+  end
 end
