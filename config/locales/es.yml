@@ -40,6 +40,9 @@ es:
       user: 'Usuario'
       entity_business: 'Empresa o Negocio'
       warehouse: 'Almacén'
+      store: 'Tienda'
+      product_item: 'Producto'
+      nom_unit: 'Unidad de Medida'
     attributes:
       product:
         title: 'Título'

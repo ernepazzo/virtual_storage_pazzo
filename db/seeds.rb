@@ -30,3 +30,81 @@ if User.count == 0
     confirmed_at: Time.current
   )
 end
+
+units = {
+  # Unidades individuales / contables
+  'unit'     => 'Unidad',
+  'pair'     => 'Par',
+  'set'      => 'Juego / Set',
+  'piece'    => 'Pieza',
+  'item'     => 'Ítem',
+  'each'     => 'Cada uno',
+  'lot'      => 'Lote',
+
+  # Unidades de peso
+  'kg'       => 'Kilogramo',
+  'g'        => 'Gramo',
+  'ton'      => 'Tonelada',
+  'lb'       => 'Libra',
+  'oz'       => 'Onza',
+
+  # Unidades de volumen / capacidad
+  'lt'       => 'Litro',
+  'l'        => 'Litro', # alternativa
+  'ml'       => 'Mililitro',
+  'm3'       => 'Metro cúbico',
+  'cm3'      => 'Centímetro cúbico',
+  'gal'      => 'Galón',
+  'bbl'      => 'Barril',
+
+  # Unidades de empaque / presentación
+  'box'      => 'Caja',
+  'package'  => 'Paquete',
+  'paquete'  => 'Paquete (español)',
+  'bag'      => 'Bolsa',
+  'bottle'   => 'Botella',
+  'can'      => 'Lata',
+  'drum'     => 'Tambor',
+  'jar'      => 'Frasco',
+  'tube'     => 'Tubo',
+  'roll'     => 'Rollo',
+
+  # Unidades logísticas / transporte
+  'pallet'   => 'Palet / Tarima',
+  'container'=> 'Contenedor',
+  'crate'    => 'Cajón / Jaula',
+  'carton'   => 'Cartón',
+  'skid'     => 'Trineo / Base',
+  'bundle'   => 'Atado / Fardo',
+
+  # Unidades de área
+  'm2'       => 'Metro cuadrado',
+  'cm2'      => 'Centímetro cuadrado',
+  'ft2'      => 'Pie cuadrado',
+  'ha'       => 'Hectárea',
+
+  # Unidades de longitud
+  'm'        => 'Metro',
+  'cm'       => 'Centímetro',
+  'km'       => 'Kilómetro',
+  'mm'       => 'Milímetro',
+  'ft'       => 'Pie',
+  'in'       => 'Pulgada',
+  'yd'       => 'Yarda',
+
+  # Otros / genéricos
+  'dozen'    => 'Docena',
+  'gross'    => 'Resma / Gran gruesa (144 unidades)',
+  'ream'     => 'Resma (500 hojas)',
+  'portion'  => 'Porción',
+  'serving'  => 'Ración',
+  'batch'    => 'Tanda / Lote de producción'
+}
+
+if NomUnit.count == 0
+  units.each do |code, name|
+    NomUnit.find_or_create_by(code: code) do |unit|
+      unit.name = name
+    end
+  end
+end

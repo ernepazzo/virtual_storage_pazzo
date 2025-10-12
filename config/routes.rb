@@ -55,6 +55,42 @@ Rails.application.routes.draw do
       get '/warehouse/:id/edit', to: 'warehouse#edit', as: 'warehouse_edit'
       put '/warehouse/:id/update', to: 'warehouse#update', as: 'warehouse_update'
       post '/warehouse/delete', to: 'warehouse#destroy_block'
+
+      # Store
+      get '/store/data'
+      get '/store', to: 'store#index', as: 'store'
+      get '/store/data', to: 'store#data'
+      get '/store/:id/show', to: 'store#show', as: 'store_show'
+      get '/store/new', to: 'store#new', as: 'store_new'
+      post '/store', to: 'store#create', as: 'store_create'
+      get '/store/:id/delete', to: 'store#destroy', as: 'store_delete'
+      get '/store/:id/edit', to: 'store#edit', as: 'store_edit'
+      put '/store/:id/update', to: 'store#update', as: 'store_update'
+      post '/store/delete', to: 'store#destroy_block'
+
+      # ProductItem
+      get '/product_item/data'
+      get '/product_item', to: 'product_item#index', as: 'product_item'
+      get '/product_item/data', to: 'product_item#data'
+      get '/product_item/:id/show', to: 'product_item#show', as: 'product_item_show'
+      get '/product_item/new', to: 'product_item#new', as: 'product_item_new'
+      post '/product_item', to: 'product_item#create', as: 'product_item_create'
+      get '/product_item/:id/delete', to: 'product_item#destroy', as: 'product_item_delete'
+      get '/product_item/:id/edit', to: 'product_item#edit', as: 'product_item_edit'
+      put '/product_item/:id/update', to: 'product_item#update', as: 'product_item_update'
+      post '/product_item/delete', to: 'product_item#destroy_block'
+
+      # NomUnit
+      get '/nom_unit/data'
+      get '/nom_unit', to: 'nom_unit#index', as: 'nom_unit'
+      get '/nom_unit/data', to: 'nom_unit#data'
+      get '/nom_unit/:id/show', to: 'nom_unit#show', as: 'nom_unit_show'
+      get '/nom_unit/new', to: 'nom_unit#new', as: 'nom_unit_new'
+      post '/nom_unit', to: 'nom_unit#create', as: 'nom_unit_create'
+      get '/nom_unit/:id/delete', to: 'nom_unit#destroy', as: 'nom_unit_delete'
+      get '/nom_unit/:id/edit', to: 'nom_unit#edit', as: 'nom_unit_edit'
+      put '/nom_unit/:id/update', to: 'nom_unit#update', as: 'nom_unit_update'
+      post '/nom_unit/delete', to: 'nom_unit#destroy_block'
     end
 
     resources :favorites, only: [:index, :create, :destroy], param: :product_id

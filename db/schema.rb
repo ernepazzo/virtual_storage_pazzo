@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_11_001756) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_12_021703) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,6 +63,21 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_11_001756) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "nom_units", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -73,6 +88,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_11_001756) do
     t.bigint "user_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "stores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "description"
+    t.bigint "entity_business_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_business_id"], name: "index_stores_on_entity_business_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -134,5 +159,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_11_001756) do
   add_foreign_key "favorites", "users_r", column: "user_id"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users_r", column: "user_id"
+  add_foreign_key "stores", "entity_businesses"
   add_foreign_key "warehouses", "entity_businesses"
 end

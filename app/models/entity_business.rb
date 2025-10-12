@@ -12,9 +12,8 @@
 require "image_processing/mini_magick"
 
 class EntityBusiness < ApplicationRecord
-  has_one_attached :image
+  include Imagen
 
-  validate :validate_image_size
   validates :name, presence: {
     message: lambda do |object, data|
       "El nombre de la Empresa o Negocio no puede estar vacío."
@@ -30,30 +29,5 @@ class EntityBusiness < ApplicationRecord
     end
   }
 
-  def validate_image_size
-    if image.attached? && image.blob.byte_size > 500.kilobytes
-      errors.add(:image, 'La imagen no puede superar los 500kb de almacenamiento.')
-      image = nil
-    end
-  end
 
-  def attach_image_webp(input_image)
-    processed_image = convert_to_webp(input_image)
-
-    image.attach(
-      io: File.open(processed_image.path),
-      filename: "#{input_image.original_filename.split('.').first}.webp",
-      content_type: "image/webp"
-    )
-  end
-
-  private
-
-  def convert_to_webp(input_image)
-    ImageProcessing::MiniMagick
-      .source(input_image)
-      .convert("webp")
-      .saver(quality: 80)
-      .call
-  end
 end

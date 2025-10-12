@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: warehouses
+# Table name: stores
 #
 #  id                 :bigint           not null, primary key
 #  code               :string(255)      not null
@@ -12,31 +12,30 @@
 #
 # Indexes
 #
-#  index_warehouses_on_entity_business_id  (entity_business_id)
+#  index_stores_on_entity_business_id  (entity_business_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (entity_business_id => entity_businesses.id)
 #
-
 require "image_processing/mini_magick"
 
-class Warehouse < ApplicationRecord
+class Store < ApplicationRecord
   belongs_to :entity_business
   include Imagen
 
   validates :name, presence: {
     message: lambda do |object, data|
-      "El nombre del Almacén no puede estar vacío."
+      "El nombre de la Tienda no puede estar vacío."
     end
   }
   validates :code, presence: {
     message: lambda do |object, data|
-      "El código del Almacén no puede estar vacío."
+      "El código de la Tienda no puede estar vacío."
     end
   }, uniqueness: {
     message: lambda do |object, data|
-      "El código del Almacén debe ser único."
+      "El código de la Tienda debe ser único."
     end
   }
 

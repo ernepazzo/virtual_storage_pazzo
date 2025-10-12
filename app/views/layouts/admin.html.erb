@@ -408,6 +408,7 @@
               <p><%= t('activerecord.models.user') %></p>
             <% end %>
           </li>
+          <li class="nav-header">ESTRUCTURA PRINCIPAL</li>
           <li class="nav-item">
             <%= link_to admin_entity_business_path, class: "nav-link" do %>
               <i class="nav-icon bi bi-building"></i>
@@ -418,6 +419,25 @@
             <%= link_to admin_warehouse_path, class: "nav-link" do %>
               <i class="nav-icon bi bi-boxes"></i>
               <p><%= t('activerecord.models.warehouse') %></p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_store_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-shop"></i>
+              <p><%= t('activerecord.models.store') %></p>
+            <% end %>
+          </li>
+          <li class="nav-header">NOMENCLADORES</li>
+          <li class="nav-item">
+            <%= link_to admin_product_item_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-card-checklist"></i>
+              <p><%= t('activerecord.models.product_item') %></p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_nom_unit_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-card-checklist"></i>
+              <p><%= t('activerecord.models.nom_unit') %></p>
             <% end %>
           </li>
 

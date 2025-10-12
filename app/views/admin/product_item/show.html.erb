@@ -1,0 +1,31 @@
+<div id="<%= dom_id @product_item %>">
+  <div class="row">
+    <div class="col-12 col-md-12 d-flex justify-content-center align-items-center">
+      <% if @product_item.image.present? %>
+        <%= image_tag @product_item.image, class: "image-upload" %>
+      <% else %>
+        <img data-image-preview-target="preview" class="image-upload" src="/unknown.webp" alt="unknown">
+      <% end %>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-12 col-md-12 d-flex justify-content-center">
+      <h4>Datos Generales</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <p>Nombre: <b><%= @product_item.name %></b></p>
+    </div>
+    <div class="col-md-6 col-12">
+      <p>Apellidos: <b><%= @product_item.code %></b></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-12">
+      <p>Descripción: <b><%= @product_item.description %></b></p>
+    </div>
+  </div>
+</div>

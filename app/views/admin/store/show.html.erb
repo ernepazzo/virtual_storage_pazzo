@@ -1,0 +1,36 @@
+<div id="<%= dom_id @store %>">
+  <div class="row">
+    <div class="col-12 col-md-12 d-flex justify-content-center align-items-center">
+      <% if @store.image.present? %>
+        <%= image_tag @store.image, class: "image-upload" %>
+      <% else %>
+        <img data-image-preview-target="preview" class="image-upload" src="/unknown.webp" alt="unknown">
+      <% end %>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-12 col-md-12 d-flex justify-content-center">
+      <h4>Datos Generales</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p>Empresa o Negocio: <b><%= @store.entity_business.name %></b></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <p>Nombre: <b><%= @store.name %></b></p>
+    </div>
+    <div class="col-md-6 col-12">
+      <p>Apellidos: <b><%= @store.code %></b></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-12">
+      <p>Descripción: <b><%= @store.description %></b></p>
+    </div>
+  </div>
+</div>

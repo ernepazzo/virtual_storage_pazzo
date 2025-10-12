@@ -4,16 +4,16 @@
       <div class="col-12">
         <div class="card card-primary card-outline mb-4">
           <div class="card-header">
-            <div class="card-title"><b><span class="bi bi-boxes"></span> Listado de Almacenes</b></div>
+            <div class="card-title"><b><span class="bi bi-card-checklist"></span> Listado de Unidades de Medida</b></div>
           </div>
           <div class="card-body">
             <div data-controller="dataTable">
               <div id="toolbar">
                 <!--                <span style="font-size: 1.5em; font-weight: bold;margin-right: 10px;">Usuarios</span>-->
                 <%# if show_html('admin_access', 'users', 'create') %>
-                <%= link_to admin_warehouse_new_path, "data-controller": "turbo", class: "btn btn-primary" do %>
+                <%= link_to admin_nom_unit_new_path, "data-controller": "turbo", class: "btn btn-primary" do %>
                   <i class="bi bi-plus"></i>
-                  Nuevo Almacén
+                  Nueva Unidad de Medida
                 <% end %>
                 <button type="button" class="btn btn-danger" data-action="click->admin#blockDelete">
                   <i class="bi bi-trash"></i>
@@ -23,29 +23,26 @@
               </div>
               <table
                 id="table"
-                data-url="/<%= I18n.locale %>/admin/warehouse/data"
+                data-url="/<%= I18n.locale %>/admin/nom_unit/data"
                 data-id-field="id"
                 data-select-item-name="id"
-                data-detail-view="true"
-                data-detail-formatter="detailFormatter"
                 data-show-columns="true"
                 data-search="true"
               >
                 <thead>
                 <tr>
-<!--                  <th data-field="id" data-checkbox="true"></th>-->
+                  <!--                  <th data-field="id" data-checkbox="true"></th>-->
                   <th data-field="id" data-width="1" data-width-unit="%"><input id="checkBtn" type='checkbox' data-action="change->dataTable#checkUncheckAll"></th>
-                  <th data-field="image" data-width="5" data-width-unit="%" data-visible="true" data-switchable="true">Imagen</th>
+                  <!--                  <th data-field="image" data-width="5" data-width-unit="%" data-visible="true" data-switchable="true">Imagen</th>-->
                   <th data-field="name" data-visible="true" data-switchable="false">Nombre</th>
                   <th data-field="code" data-visible="true" data-switchable="true">Código</th>
-                  <th data-field="entity_business" data-visible="true" data-switchable="true">Empresa o Negocio</th>
                   <!--                  <th data-field="admin" data-visible="true" data-switchable="true" data-formatter="iconFormatter">¿Admin?</th>-->
                   <th data-field="action" data-width="5" data-width-unit="%" data-visible="true" data-switchable="false" data-align="center"></th>
                 </tr>
                 </thead>
               </table>
 
-              <%= render 'partials/datatable_component/details_view' %>
+              <%#= render 'partials/datatable_component/details_view' %>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
-<%= form_with(model: warehouse, url: url, method: url_method) do |f| %>
-  <input type="hidden" id="warehouse_h" name="warehouse_h" value="new">
-  <% if warehouse.errors.any? %>
+<%= form_with(model: store, url: url, method: url_method) do |f| %>
+  <input type="hidden" id="store_h" name="store_h" value="new">
+  <% if store.errors.any? %>
     <div class="error_explanation alert_error">
       <div class="icon_error_explanation">
         <i class="icon-shield"></i>
@@ -10,10 +10,10 @@
         <!--          <span class="bi bi-x-lg text-danger"></span>-->
         <!--        </div>-->
         <h1 class="d-flex justify-content-center"><i class="bi bi-exclamation-octagon text-danger"></i></h1>
-        <h4><%= pluralize(warehouse.errors.count, "errores") %> prohíben que se salve la información:</h4>
+        <h4><%= pluralize(store.errors.count, "errores") %> prohíben que se salve la información:</h4>
 
         <ul>
-          <% warehouse.errors.each do |error| %>
+          <% store.errors.each do |error| %>
             <li class="text-danger"><%= error.message %></li>
           <% end %>
         </ul>
@@ -23,7 +23,7 @@
 
   <div class="row">
     <div class="col-12 col-md-12">
-      <%= render "partials/image/image_preview", f: f, my_model: warehouse %>
+      <%= render "partials/image/image_preview", f: f, my_model: store %>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
       </div>
 
       <div class="form-group mt-3 d-flex justify-content-end" style="gap: .5em;">
-        <%= link_to admin_warehouse_path, class: 'btn btn-secondary mb-3' do %>
+        <%= link_to admin_store_path, class: 'btn btn-secondary mb-3' do %>
           <span class="icon-arrow-left"></span> Atrás
         <% end %>
         <!-- Save changes button-->
