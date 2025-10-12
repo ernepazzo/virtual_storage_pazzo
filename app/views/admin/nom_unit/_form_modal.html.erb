@@ -1,0 +1,15 @@
+<%= turbo_frame_tag :remote_modal, target: :_top do %>
+  <div class="modal fade" id="user_modal" tabindex="-1" aria-labelledby="user_label" aria-hidden="true" data-controller="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="user_label"><%= title %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'admin/nom_unit/form', locals: { nom_unit: @nom_unit, url: @url, url_method: @url_method } %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -40,6 +40,9 @@ en:
       user: 'User'
       entity_business: 'Company or Business'
       warehouse: 'Warehouse'
+      store: 'Store'
+      product_item: 'Product'
+      nom_unit: 'Unit'
     attributes:
       product:
         title: 'Title'

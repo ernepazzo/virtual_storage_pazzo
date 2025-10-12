@@ -1,0 +1,44 @@
+<%= form_with(model: @nom_unit, url: @url, method: @url_method) do |f| %>
+  <input type="hidden" id="nom_unit_h" name="nom_unit_h" value="new">
+  <% if @nom_unit.errors.any? %>
+    <div class="error_explanation alert_error">
+      <div class="icon_error_explanation">
+        <i class="icon-shield"></i>
+      </div>
+      <div class="data_error_explanation">
+        <div class="close_btn">
+          <span class="fa fa-times"></span>
+        </div>
+        <h2><%= pluralize(@nom_unit.errors.count, "errores") %> prohíben que se salve la información:</h2>
+
+        <ul>
+          <% @nom_unit.errors.each do |error| %>
+            <li><%= error.message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="form-group">
+        <label class="small mb-1" for="text">Nombre:</label>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label class="small mb-1" for="text">Código:</label>
+        <%= f.text_field :code, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mt-3 d-flex justify-content-end" style="gap: .5em;">
+        <%= link_to admin_nom_unit_path, class: 'btn btn-secondary mb-3' do %>
+          <span class="icon-arrow-left"></span> Atrás
+        <% end %>
+        <!-- Save changes button-->
+        <button class="btn btn-success mb-3" name="commit" type="submit"><span class="icon-check  "></span> Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>
