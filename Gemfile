@@ -70,7 +70,7 @@ group :development do
   # gem "spring"
 
   # Alertas de GitHub
-  gem "rack", ">= 2.2.19"
+  gem "rack", "~> 2.2", ">= 2.2.9"
 
   gem 'pry'
   gem 'annotate'
