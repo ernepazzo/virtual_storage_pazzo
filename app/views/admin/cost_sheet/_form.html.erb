@@ -21,11 +21,11 @@
     </div>
   <% end %>
 
-<!--  <div class="row">-->
-<!--    <div class="col-12 col-md-12">-->
-      <%#= render "partials/image/image_preview", f: f, my_model: cost_sheet %>
-<!--    </div>-->
-<!--  </div>-->
+  <!--  <div class="row">-->
+  <!--    <div class="col-12 col-md-12">-->
+  <%#= render "partials/image/image_preview", f: f, my_model: cost_sheet %>
+  <!--    </div>-->
+  <!--  </div>-->
 
   <div class="row" data-controller="polymorphic-select">
     <div class="col-xl-12">
@@ -33,7 +33,7 @@
         <label for="" class="form-label">Producto</label>
         <%= f.select :product_item_id,
                      ProductItem.all.pluck(:name, :id),
-                     { prompt: "Selecciona un producto"},
+                     { prompt: "Selecciona un producto" },
                      class: 'form-control select2 required',
                      'data-title': 'Producto'
         %>
@@ -47,9 +47,10 @@
                      {
                        class: "form-control",
                        data: {
-                       action: "change->polymorphic-select#toggle",
-                       polymorphic_select_target: "typeSelect"
-                     } } %>
+                         action: "change->polymorphic-select#toggle",
+                         polymorphic_select_target: "typeSelect"
+                       }
+                     } %>
       </div>
       <div class="form-group" data-polymorphic-select-target="storeSelect">
         <%= f.label :source_id, "Tienda" %>
