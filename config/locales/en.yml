@@ -41,6 +41,7 @@ en:
       entity_business: 'Company or Business'
       warehouse: 'Warehouse'
       store: 'Store'
+      cost_sheet: 'Cost Sheet'
       product_item: 'Product'
       nom_unit: 'Unit'
     attributes:

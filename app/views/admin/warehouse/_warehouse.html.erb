@@ -25,7 +25,7 @@
       <p>Nombre: <b><%= warehouse.name %></b></p>
     </div>
     <div class="col-md-6 col-12">
-      <p>Apellidos: <b><%= warehouse.code %></b></p>
+      <p>Código: <b><%= warehouse.code %></b></p>
     </div>
   </div>
   <div class="row">
@@ -33,4 +33,24 @@
       <p>Descripción: <b><%= warehouse.description %></b></p>
     </div>
   </div>
+
+  <div class="row mt-5">
+    <div class="col-12 col-md-12 d-flex justify-content-center">
+      <h4>Productos disponibles</h4>
+    </div>
+  </div>
+  <% if warehouse.cost_sheets.any? %>
+    <!--    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">-->
+    <div class="row">
+      <% warehouse.cost_sheets.each do |cost_sheet| %>
+        <div class="col-12 col-md-6 col-xl-4">
+          <%= render 'admin/cost_sheet/cost_sheet', cost_sheet: cost_sheet %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info">
+      No hay productos registrados en este almacén.
+    </div>
+  <% end %>
 </div>

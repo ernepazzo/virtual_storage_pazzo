@@ -91,6 +91,18 @@ Rails.application.routes.draw do
       get '/nom_unit/:id/edit', to: 'nom_unit#edit', as: 'nom_unit_edit'
       put '/nom_unit/:id/update', to: 'nom_unit#update', as: 'nom_unit_update'
       post '/nom_unit/delete', to: 'nom_unit#destroy_block'
+
+      # CostSheets
+      get '/cost_sheet/data'
+      get '/cost_sheet', to: 'cost_sheet#index', as: 'cost_sheet'
+      get '/cost_sheet/data', to: 'cost_sheet#data'
+      get '/cost_sheet/:id/show', to: 'cost_sheet#show', as: 'cost_sheet_show'
+      get '/cost_sheet/new', to: 'cost_sheet#new', as: 'cost_sheet_new'
+      post '/cost_sheet', to: 'cost_sheet#create', as: 'cost_sheet_create'
+      get '/cost_sheet/:id/delete', to: 'cost_sheet#destroy', as: 'cost_sheet_delete'
+      get '/cost_sheet/:id/edit', to: 'cost_sheet#edit', as: 'cost_sheet_edit'
+      put '/cost_sheet/:id/update', to: 'cost_sheet#update', as: 'cost_sheet_update'
+      post '/cost_sheet/delete', to: 'cost_sheet#destroy_block'
     end
 
     resources :favorites, only: [:index, :create, :destroy], param: :product_id

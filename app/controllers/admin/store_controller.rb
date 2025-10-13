@@ -107,7 +107,7 @@ class Admin::StoreController < ApplicationController
 
     begin
       @store.destroy
-      msg = 'Tienda eliminado.'
+      msg = 'Tienda eliminada.'
       success = true
     rescue StandardError => e
       success = false

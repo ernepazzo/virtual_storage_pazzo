@@ -427,6 +427,13 @@
               <p><%= t('activerecord.models.store') %></p>
             <% end %>
           </li>
+          <li class="nav-header">OPERACIONES</li>
+          <li class="nav-item">
+            <%= link_to admin_cost_sheet_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-journal-bookmark"></i>
+              <p><%= t('activerecord.models.cost_sheet') %></p>
+            <% end %>
+          </li>
           <li class="nav-header">NOMENCLADORES</li>
           <li class="nav-item">
             <%= link_to admin_product_item_path, class: "nav-link" do %>

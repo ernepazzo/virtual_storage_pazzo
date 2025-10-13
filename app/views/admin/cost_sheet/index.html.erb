@@ -1,0 +1,59 @@
+<div class="app-content mt-3">
+  <div class="container-fluid">
+    <div class="row g-4">
+      <div class="col-12">
+        <div class="card card-primary card-outline mb-4">
+          <div class="card-header">
+            <div class="card-title"><b><span class="bi bi-journal-bookmark"></span> Listado de Fichas de Costo</b></div>
+          </div>
+          <div class="card-body">
+            <div data-controller="dataTable">
+              <div id="toolbar">
+                <!--                <span style="font-size: 1.5em; font-weight: bold;margin-right: 10px;">Usuarios</span>-->
+                <%# if show_html('admin_access', 'users', 'create') %>
+                <%= link_to admin_cost_sheet_new_path, "data-controller": "turbo", class: "btn btn-primary" do %>
+                  <i class="bi bi-plus"></i>
+                  Nueva Ficha de Costo
+                <% end %>
+                <button type="button" class="btn btn-danger" data-action="click->admin#blockDelete">
+                  <i class="bi bi-trash"></i>
+                  Eliminar
+                </button>
+                <%# end %>
+              </div>
+              <table
+                id="table"
+                data-url="/<%= I18n.locale %>/admin/cost_sheet/data"
+                data-id-field="id"
+                data-select-item-name="id"
+                data-show-columns="true"
+                data-search="true"
+              >
+                <thead>
+                <tr>
+                  <!--                  <th data-field="id" data-checkbox="true"></th>-->
+                  <th data-field="id" data-width="1" data-width-unit="%"><input id="checkBtn" type='checkbox' data-action="change->dataTable#checkUncheckAll"></th>
+                  <!--                  <th data-field="image" data-width="5" data-width-unit="%" data-visible="true" data-switchable="true">Imagen</th>-->
+                  <th data-field="product_item" data-visible="true" data-switchable="false">Producto</th>
+                  <th data-field="source" data-visible="true" data-switchable="false">Fuente</th>
+                  <th data-field="cost_price" data-visible="true" data-switchable="true">Precio<br>Costo</th>
+                  <th data-field="sale_price" data-visible="true" data-switchable="true">Precio<br>Venta</th>
+                  <th data-field="storage_amount" data-visible="true" data-switchable="true">Cantidad<br>Almacenamiento</th>
+                  <th data-field="storage_unit" data-visible="true" data-switchable="true">Unidad de Medida<br>Almacenamiento</th>
+                  <th data-field="sale_amount" data-visible="true" data-switchable="true">Cantidad<br>Venta</th>
+                  <th data-field="sale_unit" data-visible="true" data-switchable="true">Unidad de Medida<br>Venta</th>
+                  <th data-field="entry_date" data-visible="true" data-switchable="true">Fecha</th>
+                  <!--                  <th data-field="admin" data-visible="true" data-switchable="true" data-formatter="iconFormatter">¿Admin?</th>-->
+                  <th data-field="action" data-width="5" data-width-unit="%" data-visible="true" data-switchable="false" data-align="center"></th>
+                </tr>
+                </thead>
+              </table>
+
+              <%#= render 'partials/datatable_component/details_view' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
