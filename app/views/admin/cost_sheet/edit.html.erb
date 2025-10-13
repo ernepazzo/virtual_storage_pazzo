@@ -1,0 +1,155 @@
+<%= form_with(model: @cost_sheet, url: @url, method: @url_method) do |f| %>
+  <input type="hidden" id="cost_sheet_h" name="cost_sheet_h" value="new">
+  <% if @cost_sheet.errors.any? %>
+    <div class="error_explanation alert_error">
+      <div class="icon_error_explanation">
+        <i class="icon-shield"></i>
+      </div>
+      <div class="data_error_explanation">
+        <!--        <div class="close_btn">-->
+        <!--          <span class="bi bi-x-lg text-danger"></span>-->
+        <!--        </div>-->
+        <h1 class="d-flex justify-content-center"><i class="bi bi-exclamation-octagon text-danger"></i></h1>
+        <h4><%= pluralize(@cost_sheet.errors.count, "errores") %> prohíben que se salve la información:</h4>
+
+        <ul>
+          <% @cost_sheet.errors.each do |error| %>
+            <li class="text-danger"><%= error.message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-12 col-md-12">-->
+  <%#= render "partials/image/image_preview", f: f, my_model: cost_sheet %>
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <div class="row" data-controller="polymorphic-select">
+    <div class="col-xl-12">
+      <div class="form-group">
+        <label for="" class="form-label">Producto</label>
+        <%= f.select :product_item_id,
+                     ProductItem.all.pluck(:name, :id),
+                     { prompt: "Selecciona un producto"},
+                     class: 'form-control select2 required',
+                     'data-title': 'Producto'
+        %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :source_type, "Tipo de destino" %>
+        <%= f.select :source_type,
+                     options_for_select([%w[Tienda Store], %w[Almacén Warehouse]], f.object.source_type),
+                     { include_blank: "Selecciona un tipo" },
+                     {
+                       class: "form-control",
+                       data: {
+                         action: "change->polymorphic-select#toggle",
+                         polymorphic_select_target: "typeSelect"
+                       } } %>
+      </div>
+      <div class="form-group" data-polymorphic-select-target="storeSelect">
+        <%= f.label :source_id, "Tienda" %>
+        <%= f.collection_select :source_id, Store.all, :id, :name,
+                                { include_blank: "Selecciona una tienda" },
+                                {
+                                  class: "form-control",
+                                  disabled: f.object.source_type != 'Store'
+                                } %>
+      </div>
+      <div class="form-group" data-polymorphic-select-target="warehouseSelect">
+        <%= f.collection_select :source_id, Warehouse.all, :id, :name,
+                                { include_blank: "Selecciona un almacén" },
+                                {
+                                  class: "form-control",
+                                  disabled: f.object.source_type != 'Warehouse'
+                                } %>
+      </div>
+
+      <!-- Campos monetarios -->
+      <div class="form-group">
+        <%= f.label :cost_price_cents, "Precio de costo" %>
+        <%= f.number_field :cost_price_cents,
+                           value: @cost_sheet.cost_price_cents || '',
+                           step: 1,
+                           min: 0,
+                           placeholder: "En centavos (ej. 1500 = $15.00)",
+                           class: "form-control"
+        %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :sale_price_cents, "Precio de venta" %>
+        <%= f.number_field :sale_price_cents,
+                           value: @cost_sheet.sale_price_cents || '',
+                           step: 1,
+                           min: 0,
+                           placeholder: "En centavos (ej. 2000 = $20.00)",
+                           class: "form-control" %>
+      </div>
+
+      <!-- Opcional: mostrar moneda si usas múltiples -->
+      <% if MoneyRails.default_currency.nil? %>
+        <div class="form-group">
+          <%= f.label :cost_price_currency, "Moneda (costo)" %>
+          <%= f.select :cost_price_currency,
+                       options_for_select(Money::Currency.table.keys.map { |c| [c.upcase, c] }, f.object.cost_price_currency),
+                       { include_blank: false } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :sale_price_currency, "Moneda (venta)" %>
+          <%= f.select :sale_price_currency,
+                       options_for_select(Money::Currency.table.keys.map { |c| [c.upcase, c] }, f.object.sale_price_currency),
+                       { include_blank: false } %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <label class="small mb-1" for="text">Cantidad en Almacenamiento:</label>
+        <%= f.text_field :storage_amount,
+                         class: 'form-control',
+                         placeholder: "Introduzca la cantidad"
+        %>
+      </div>
+      <div class="form-group">
+        <label class="small mb-1" for="text">Unidad de Medida en Almacenamiento:</label>
+        <%= f.select :storage_unit_id,
+                     NomUnit.all.pluck(:name, :id),
+                     { prompt: "Seleccione la Unidad de Medida de almacenamiento" },
+                     class: 'form-control select2 required',
+                     'data-title': 'Unidad de Medida en Almacenamiento'
+        %>
+      </div>
+      <div class="form-group">
+        <label class="small mb-1" for="text">Cantidad de Venta:</label>
+        <%= f.text_field :sale_amount, class: 'form-control', placeholder: "Introduzca la cantidad" %>
+      </div>
+      <div class="form-group">
+        <label class="small mb-1" for="text">Unidad de Medida de venta:</label>
+        <%= f.select :sale_unit_id,
+                     NomUnit.all.pluck(:name, :id),
+                     { prompt: "Seleccione la Unidad de Medida de venta" },
+                     class: 'form-control select2 required',
+                     'data-title': 'Unidad de Medida de venta'
+        %>
+      </div>
+      <div class="form-group">
+        <label class="small mb-1" for="text">Fecha:</label>
+        <%= f.text_field :entry_date, class: 'form-control', placeholder: "Introduzca la fecha" %>
+      </div>
+
+      <div class="form-group mt-3 d-flex justify-content-end" style="gap: .5em;">
+        <%= link_to admin_cost_sheet_path, class: 'btn btn-secondary mb-3' do %>
+          <span class="icon-arrow-left"></span> Atrás
+        <% end %>
+        <!-- Save changes button-->
+        <button class="btn btn-success mb-3" name="commit" type="submit"><span class="icon-check  "></span> Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>

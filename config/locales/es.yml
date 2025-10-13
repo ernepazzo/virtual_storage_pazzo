@@ -41,6 +41,7 @@ es:
       entity_business: 'Empresa o Negocio'
       warehouse: 'Almacén'
       store: 'Tienda'
+      cost_sheet: 'Ficha de Costo'
       product_item: 'Producto'
       nom_unit: 'Unidad de Medida'
     attributes:

@@ -1,0 +1,66 @@
+<!-- app/views/cost_sheets/_cost_sheet_card.html.erb -->
+<div class="card mb-4 border rounded shadow-sm" style="max-width: 100%;">
+  <div class="card-body">
+    <!-- Producto -->
+    <h5 class="card-title fw-bold">
+      <%= @cost_sheet.product_item.name %>
+      <span class="badge bg-secondary ms-2">
+        <%= @cost_sheet.source_type == 'Store' ? 'Tienda' : 'Almacén' %>
+      </span>
+    </h5>
+
+    <!-- Ubicación -->
+    <p class="text-muted mb-3">
+      <i class="bi bi-geo-alt"></i>
+      <%= @cost_sheet.source.name %>
+    </p>
+
+    <!-- Cantidades y unidades -->
+    <div class="row mb-3">
+      <div class="col-6">
+        <small class="text-muted">En almacén</small>
+        <div class="fw-bold">
+          <%= @cost_sheet.storage_amount || 0 %>
+          <%= @cost_sheet.storage_unit&.name || '—' %>
+        </div>
+      </div>
+      <div class="col-6">
+        <small class="text-muted">Unidad de venta</small>
+        <div class="fw-bold">
+          <%= @cost_sheet.sale_amount || 0 %>
+          <%= @cost_sheet.sale_unit&.name || '—' %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Precios -->
+    <div class="row mb-3">
+      <div class="col-6">
+        <small class="text-muted">Costo</small>
+        <div class="fw-bold text-success">
+          <%= humanized_money_with_symbol(Money.new(@cost_sheet.cost_price_cents, @cost_sheet.cost_price_currency)) %>
+        </div>
+      </div>
+      <div class="col-6">
+        <small class="text-muted">Venta</small>
+        <div class="fw-bold text-primary">
+          <%= humanized_money_with_symbol(Money.new(@cost_sheet.sale_price_cents, @cost_sheet.sale_price_currency)) %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fecha de entrada -->
+    <% if @cost_sheet.entry_date.present? %>
+      <small class="text-muted d-block mt-2">
+        <i class="bi bi-calendar"></i>
+        Entrada: <%= @cost_sheet.entry_date %>
+      </small>
+    <% end %>
+
+    <!-- Acciones (opcional) -->
+    <div class="mt-3">
+      <%#= link_to "Editar", edit_@cost_sheet_path(@cost_sheet), class: "btn btn-sm btn-outline-secondary" %>
+      <%#= link_to "Ver", cost_sheet_path(cost_sheet), class: "btn btn-sm btn-outline-primary" %>
+    </div>
+  </div>
+</div>

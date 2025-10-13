@@ -21,8 +21,10 @@
 require "image_processing/mini_magick"
 
 class Store < ApplicationRecord
-  belongs_to :entity_business
   include Imagen
+
+  belongs_to :entity_business
+  has_many :cost_sheets, :as => :source, :dependent => :destroy
 
   validates :name, presence: {
     message: lambda do |object, data|
