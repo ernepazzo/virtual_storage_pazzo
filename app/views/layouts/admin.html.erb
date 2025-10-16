@@ -403,7 +403,7 @@
             <% end %>
           </li>
 
-          <li class="nav-header">ESTRUCTURA PRINCIPAL</li>
+          <li class="nav-header">Principal</li>
           <li class="nav-item">
             <%= link_to admin_entity_business_path, class: "nav-link" do %>
               <i class="nav-icon bi bi-building"></i>
@@ -422,24 +422,11 @@
               <p><%= t('activerecord.models.store') %></p>
             <% end %>
           </li>
-          <li class="nav-header">OPERACIONES</li>
+          <li class="nav-header">Operaciones</li>
           <li class="nav-item">
             <%= link_to admin_cost_sheet_path, class: "nav-link" do %>
               <i class="nav-icon bi bi-journal-bookmark"></i>
               <p><%= t('activerecord.models.cost_sheet') %></p>
-            <% end %>
-          </li>
-          <li class="nav-header">NOMENCLADORES</li>
-          <li class="nav-item">
-            <%= link_to admin_product_item_path, class: "nav-link" do %>
-              <i class="nav-icon bi bi-card-checklist"></i>
-              <p><%= t('activerecord.models.product_item') %></p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to admin_nom_unit_path, class: "nav-link" do %>
-              <i class="nav-icon bi bi-card-checklist"></i>
-              <p><%= t('activerecord.models.nom_unit') %></p>
             <% end %>
           </li>
           <li class="nav-header">Seguridad</li>
@@ -459,6 +446,19 @@
             <%= link_to admin_permissions_path, class: "nav-link" do %>
               <i class="nav-icon bi bi-card-checklist"></i>
               <p><%= t('activerecord.models.permission') %></p>
+            <% end %>
+          </li>
+          <li class="nav-header">Nomencladores</li>
+          <li class="nav-item">
+            <%= link_to admin_product_item_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-card-checklist"></i>
+              <p><%= t('activerecord.models.product_item') %></p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_nom_unit_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-card-checklist"></i>
+              <p><%= t('activerecord.models.nom_unit') %></p>
             <% end %>
           </li>
 
