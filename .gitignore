@@ -43,4 +43,5 @@
 /node_modules
 .idea/
 /test/*
+test/*
 /storage/
