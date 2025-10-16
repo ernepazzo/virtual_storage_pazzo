@@ -35,7 +35,7 @@ class Role < ApplicationRecord
     end
 
     accesses_attributes.each do |access|
-      new_permision = Access.find_or_create_by(permission_id: access[1]['admin_permissions_id'],
+      new_permision = Access.find_or_create_by(permission_id: access[1]['permissions_id'],
                                                can_show: access[1]['can_show'],
                                                can_create: access[1]['can_create'],
                                                can_edit: access[1]['can_edit'],
@@ -54,11 +54,11 @@ class Role < ApplicationRecord
         if access.access.can_show ||access.access.can_create || access.access.can_edit || access.access.can_delete|| access.access.can_other
           description += "<tr>"
           description += "<td>#{access.access.permission.name}</td>"
-          description += "<td>Mostrar: #{access.access.can_show? ? '<span class="fa fa-check text-success"></span>' : '<span class="fa fa-times text-danger"></span>'}</td>"
-          description += "<td>Crear: #{access.access.can_create? ? '<span class="fa fa-check text-success"></span>' : '<span class="fa fa-times text-danger"></span>'}</td>"
-          description += "<td>Editar: #{access.access.can_edit? ? '<span class="fa fa-check text-success"></span>' : '<span class="fa fa-times text-danger"></span>'}</td>"
-          description += "<td>Eliminar: #{access.access.can_delete? ? '<span class="fa fa-check text-success"></span>' : '<span class="fa fa-times text-danger"></span>'}</td>"
-          description += "<td>Otras acciones: #{access.access.can_other ? '<span class="fa fa-check text-success"></span>' : '<span class="fa fa-times text-danger"></span>'}</td>"
+          description += "<td>Mostrar: #{access.access.can_show? ? '<span class="bi bi-check text-success"></span>' : '<span class="bi bi-x text-danger"></span>'}</td>"
+          description += "<td>Crear: #{access.access.can_create? ? '<span class="bi bi-check text-success"></span>' : '<span class="bi bi-x text-danger"></span>'}</td>"
+          description += "<td>Editar: #{access.access.can_edit? ? '<span class="bi bi-check text-success"></span>' : '<span class="bi bi-x text-danger"></span>'}</td>"
+          description += "<td>Eliminar: #{access.access.can_delete? ? '<span class="bi bi-check text-success"></span>' : '<span class="bi bi-x text-danger"></span>'}</td>"
+          description += "<td>Otras acciones: #{access.access.can_other ? '<span class="bi bi-check text-success"></span>' : '<span class="bi bi-x text-danger"></span>'}</td>"
           description += "</tr>"
         end
       end

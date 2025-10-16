@@ -1,21 +1,21 @@
 Rails.application.routes.draw do
+
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     # Rutas personalizadas para login/logout
     devise_scope :user do
-      get    '/login',  to: 'devise/sessions#new',     as: :login
-      post   '/login',  to: 'devise/sessions#create'
+      get '/login', to: 'devise/sessions#new', as: :login
+      post '/login', to: 'devise/sessions#create'
       delete '/logout', to: 'devise/sessions#destroy', as: :logout
-      get    '/register', to: 'devise/registrations#new', as: :register
-      post   '/register', to: 'devise/registrations#create'
-      get    '/profile/edit', to: 'devise/registrations#edit', as: :edit_profile
-      put    '/profile', to: 'devise/registrations#update'
-      patch  '/profile', to: 'devise/registrations#update'
+      get '/register', to: 'devise/registrations#new', as: :register
+      post '/register', to: 'devise/registrations#create'
+      get '/profile/edit', to: 'devise/registrations#edit', as: :edit_profile
+      put '/profile', to: 'devise/registrations#update'
+      patch '/profile', to: 'devise/registrations#update'
       delete '/profile', to: 'devise/registrations#destroy'
     end
 
     # Resto de rutas Devise normales (/users/...)
-    devise_for :users
-
+    devise_for :users, controllers: { registrations: 'users/registrations' }
 
     root 'products#index'
     # namespace :authentication, path: '', as: '' do
@@ -31,6 +31,26 @@ Rails.application.routes.draw do
       get '/users/:id/perfil', to: 'users#show', as: 'user_show'
       get '/users/:id/edit', to: 'users#edit', as: 'users_edit'
       post '/users/:id/update', to: 'users#update', as: 'users_update'
+
+      # ROLES
+      get '/role', to: 'role#index', as: 'roles'
+      get '/role/data', to: 'role#data'
+      get '/role/new', to: 'role#new', as: 'role_new'
+      post '/role', to: 'role#create', as: 'role_create'
+      get '/role/:id/edit', to: 'role#edit', as: 'role_edit'
+      put '/role/:id/update', to: 'role#update', as: 'role_update'
+      get '/role/:id/delete', to: 'role#destroy', as: 'role_delete'
+      post '/role/delete', to: 'role#destroy_block'
+
+      # PERMISSIONS
+      get '/permission', to: 'permission#index', as: 'permissions'
+      get '/permission/data', to: 'permission#data'
+      get '/permission/new', to: 'permission#new', as: 'permission_new'
+      post '/permission', to: 'permission#create', as: 'permission_create'
+      get '/permission/:id/edit', to: 'permission#edit', as: 'permission_edit'
+      put '/permission/:id/update', to: 'permission#update', as: 'permission_update'
+      get '/permission/:id/delete', to: 'permission#destroy', as: 'permission_delete'
+      post '/permission/delete', to: 'permission#destroy_block'
 
       # Entity Business
       get '/entity_business/data'

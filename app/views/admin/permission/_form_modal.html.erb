@@ -1,0 +1,15 @@
+<%= turbo_frame_tag :remote_modal, target: :_top do %>
+  <div class="modal fade " id="permission_modal" tabindex="-1" aria-labelledby="permission_label" aria-hidden="true" data-controller="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="permission_label"><%= title %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'admin/permission/form', locals: { url: @url, url_method: @url_method, view: @view, permission: @permission } %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -96,7 +96,7 @@
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary" data-controller="admin">
+<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary" data-controller="admin" style="position:relative !important;">
 <!--begin::App Wrapper-->
 <div class="app-wrapper">
   <!--begin::Header-->
@@ -402,12 +402,7 @@
               <p><%= t('shared.items.administration') %></p>
             <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to admin_users_path, class: "nav-link" do %>
-              <i class="nav-icon bi bi-person-fill"></i>
-              <p><%= t('activerecord.models.user') %></p>
-            <% end %>
-          </li>
+
           <li class="nav-header">ESTRUCTURA PRINCIPAL</li>
           <li class="nav-item">
             <%= link_to admin_entity_business_path, class: "nav-link" do %>
@@ -447,7 +442,25 @@
               <p><%= t('activerecord.models.nom_unit') %></p>
             <% end %>
           </li>
-
+          <li class="nav-header">Seguridad</li>
+          <li class="nav-item">
+            <%= link_to admin_users_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-person-fill"></i>
+              <p><%= t('activerecord.models.user') %></p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_roles_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-person-circle"></i>
+              <p><%= t('activerecord.models.role') %></p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_permissions_path, class: "nav-link" do %>
+              <i class="nav-icon bi bi-card-checklist"></i>
+              <p><%= t('activerecord.models.permission') %></p>
+            <% end %>
+          </li>
 
 
 
@@ -682,6 +695,7 @@
     $(document).ready(function () {
         <% if flash.present?%>
         <%flash.each do |f| %>
+
         toastr["<%=f[0] %>"]("<%=f[1] %>")
         <%end %>
         <%end %>

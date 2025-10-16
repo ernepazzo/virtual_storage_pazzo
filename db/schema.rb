@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_12_020053) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_12_170036) do
   create_table "accesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.boolean "can_create", default: false
     t.boolean "can_edit", default: false
@@ -57,6 +57,27 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_12_020053) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cost_sheets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_item_id", null: false
+    t.string "source_type", null: false
+    t.bigint "source_id", null: false
+    t.integer "cost_price_cents", default: 0, null: false
+    t.string "cost_price_currency", default: "CUP", null: false
+    t.integer "sale_price_cents", default: 0, null: false
+    t.string "sale_price_currency", default: "CUP", null: false
+    t.integer "storage_amount"
+    t.bigint "storage_unit_id", null: false
+    t.integer "sale_amount"
+    t.bigint "sale_unit_id", null: false
+    t.string "entry_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_item_id"], name: "index_cost_sheets_on_product_item_id"
+    t.index ["sale_unit_id"], name: "index_cost_sheets_on_sale_unit_id"
+    t.index ["source_type", "source_id"], name: "index_cost_sheets_on_source"
+    t.index ["storage_unit_id"], name: "index_cost_sheets_on_storage_unit_id"
+  end
+
   create_table "entity_businesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "code", null: false
@@ -75,9 +96,24 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_12_020053) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "nom_units", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "permissions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "permission_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -110,6 +146,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_12_020053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_default", default: false
+  end
+
+  create_table "stores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "code", null: false
+    t.string "description"
+    t.bigint "entity_business_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_business_id"], name: "index_stores_on_entity_business_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -157,12 +203,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_12_020053) do
   add_foreign_key "accesses", "permissions"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cost_sheets", "nom_units", column: "sale_unit_id"
+  add_foreign_key "cost_sheets", "nom_units", column: "storage_unit_id"
+  add_foreign_key "cost_sheets", "product_items"
   add_foreign_key "favorites", "products"
   add_foreign_key "favorites", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
   add_foreign_key "role_has_accesses", "accesses"
   add_foreign_key "role_has_accesses", "roles"
+  add_foreign_key "stores", "entity_businesses"
   add_foreign_key "users", "roles"
   add_foreign_key "warehouses", "entity_businesses"
 end

@@ -6,7 +6,7 @@ window.$ = window.jQuery = jQuery
 
 // 3. Importa librerías
 import bootbox from "bootbox"
-import toastr from "toastr"
+// import toastr from "toastr"
 
 // 4. Importa extensiones de Bootstrap Table
 import "bootstrap-table/dist/bootstrap-table.min"

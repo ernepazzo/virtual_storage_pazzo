@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "remote_modal" do %>
+  <%= render partial: 'admin/role/form_modal', locals: { role: @role, url: @url, url_method: @url_method, view: @view, permission: @permission, title: 'Editar Rol' } %>
+<% end %>
