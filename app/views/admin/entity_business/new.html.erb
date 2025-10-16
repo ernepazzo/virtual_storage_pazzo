@@ -6,14 +6,12 @@
         <i class="icon-shield"></i>
       </div>
       <div class="data_error_explanation">
-        <div class="close_btn">
-          <span class="fa fa-times"></span>
-        </div>
-        <h2><%= pluralize(@entity_business.errors.count, "errores") %> prohíben que se salve la información:</h2>
+        <h1 class="d-flex justify-content-center"><i class="bi bi-exclamation-octagon text-danger"></i></h1>
+        <h4><%= pluralize(@entity_business.errors.count, "errores") %> prohíben que se salve la información:</h4>
 
         <ul>
           <% @entity_business.errors.each do |error| %>
-            <li><%= error.message %></li>
+            <li class="text-danger"><%= error.message %></li>
           <% end %>
         </ul>
       </div>

@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
 
     users.each do |user|
       action = ''
-      action += "<a class='dropdown-item' href='/admin/users/#{user.id}/perfil'><span class='bi bi-eye text-info'></span> Perfil</a>" # if show_html('admin_access', 'users', 'show')
+      action += "<a class='dropdown-item' href='/admin/users/#{user.id}/perfil' data-controller='turbo'><span class='bi bi-eye text-info'></span> Perfil</a>" # if show_html('admin_access', 'users', 'show')
       action += "<a class='dropdown-item' href='/#{I18n.locale}/admin/users/#{user.id}/edit' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" # if show_html('admin_access', 'users', 'edit')
       action += "<a class='dropdown-item' href='javascript:;' data-action='dataTable#delete' data-target='/admin/users/#{user.id}'><span class='bi bi-trash text-danger' data-action='dataTable#delete' data-target='/admin/users/#{user.id}'></span> Eliminar</a>" # if show_html('admin_access', 'users', 'delete')
 
@@ -68,8 +68,10 @@ class Admin::UsersController < ApplicationController
 
       rows.push(
         id: user.id,
+        image: "<div style='text-align: center;'><img src='#{user.image.present? ? url_for(user.image) : url_for('/no_images_200_x_200.png')}' class='avatar img-fluid rounded me-1' alt=''></div>",
         email: user.email,
         whatsapp: user.whatsapp,
+        role: user.role&.role_type,
         admin: admin,
         description: 'Test',
         action: "<div class='dropstart'>
@@ -114,6 +116,9 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    @url = admin_users_update_path(id: @user.id)
+    @url_method = 'POST'
+
     if @user.update(user_params)
       flash[:success] = "Usuario actualizado."
       redirect_to admin_users_path
@@ -135,6 +140,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :whatsapp, :admin)
+    params.require(:user).permit(:email, :whatsapp, :admin, :role_id, :image)
   end
 end

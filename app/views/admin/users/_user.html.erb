@@ -1,51 +1,58 @@
-<%# binding.pry %>
-<%= form_with(model: user, url: url, method: url_method) do |f| %>
-  <input type="hidden" id="user_hidden" name="user_hidden" value="new">
-  <% if user.errors.any? %>
-    <div class="error_explanation alert_error">
-      <div class="icon_error_explanation">
-        <i class="icon-shield"></i>
-      </div>
-      <div class="data_error_explanation">
-        <div class="close_btn">
-          <span class="fa fa-times"></span>
-        </div>
-        <h2><%= pluralize(user.errors.count, "errores") %> prohíben que se salve la información:</h2>
-
-        <ul>
-          <% user.errors.each do |error| %>
-            <li><%= error.message %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
+<div id="<%= dom_id user %>">
   <div class="row">
-    <div class="col-xl-12">
-      <div class="form-group">
-        <label class="small mb-1" for="text">Correo electrónico:</label>
-        <%= f.text_field :email, class: 'form-control' %>
-      </div>
-      <div class="form-group mt-1">
-        <label class="small mb-1" for="text">Whatsapp:</label>
-        <%= f.text_field :whatsapp, class: 'form-control' %>
-      </div>
-      <div class="form-group mt-3">
-        <%= f.label :admin, class: 'small mb-1' do %>¿Admin?
-        <% end %>
-        <%= f.check_box :admin %>
-      </div>
-
-      <%#= link_to admin_users_path, class: 'btn btn-secondary mb-3' do %>
-      <!--        <span class="icon-arrow-left"></span> Atrás-->
-      <%# end %>
-      <div class="modal-footer mt-3">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atrás</button>
-        <!-- Save changes button-->
-        <button class="btn btn-success" name="commit" type="submit"><span class="icon-check  "></span> Guardar
-        </button>
-      </div>
+    <div class="col-12 col-md-12 d-flex justify-content-center align-items-center">
+      <% if user.image.present? %>
+        <%= image_tag user.image, class: "image-upload" %>
+      <% else %>
+        <img data-image-preview-target="preview" class="image-upload" src="/unknown.webp" alt="unknown">
+      <% end %>
     </div>
   </div>
-<% end %>
+  <hr>
+
+  <div class="row">
+    <div class="col-12 col-md-12 d-flex justify-content-center">
+      <h4>Datos Generales</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p>Rol: <b><%= user.role&.role_type %></b></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p>Correo Electrónico:
+        <b><%= @user.email %></b> <%= (@user.confirmed? ? '<i class="bi bi-check-all" style="color: green;"></i>' : '<i class="bi bi-x" style="color: red;"></i>').html_safe %>
+      </p>
+    </div>
+    <div class="col-12">
+      <p>Whatsapp: <b><%= user.whatsapp %></b></p>
+    </div>
+  </div>
+  <!--  <div class="row">-->
+  <!--    <div class="col-md-12 col-12">-->
+  <!--      <p>Descripción: <b><%#= user.description %></b></p>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <!--  <div class="row mt-5">-->
+  <!--    <div class="col-12 col-md-12 d-flex justify-content-center">-->
+  <!--      <h4>Productos disponibles</h4>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <%# if store.cost_sheets.any? %>
+  <!--    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">-->
+  <!--    <div class="row">-->
+  <%# store.cost_sheets.each do |cost_sheet| %>
+  <!--        <div class="col-12 col-md-6 col-xl-4">-->
+  <%#= render 'admin/cost_sheet/cost_sheet', cost_sheet: cost_sheet %>
+  <!--        </div>-->
+  <%# end %>
+  <!--    </div>-->
+  <%# else %>
+  <!--    <div class="alert alert-info">-->
+  <!--      No hay productos registrados en este almacén.-->
+  <!--    </div>-->
+  <%# end %>
+</div>

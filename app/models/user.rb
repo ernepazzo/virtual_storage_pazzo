@@ -41,6 +41,7 @@
 #  fk_rails_...  (role_id => roles.id)
 #
 class User < ApplicationRecord
+  include Imagen
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   acts_as_paranoid
@@ -60,6 +61,8 @@ class User < ApplicationRecord
 
   belongs_to :role
 
+  validate :role_priority_cannot_decrease, on: :update
+
   def access_and_permissions
     role_access = RoleHasAccess.where(role_id: role&.id)
     access_permissions = {}
@@ -78,5 +81,18 @@ class User < ApplicationRecord
     end
 
     access_permissions
+  end
+
+  private
+
+  def role_priority_cannot_decrease
+    return unless role_id_changed?
+
+    current_role_priority = role_id_was || 0
+    new_role_priority = Role.find_by(id: role_id)&.priority || 0
+
+    if new_role_priority < current_role_priority
+      errors.add(:role, "no puede tener menor prioridad que el rol actual")
+    end
   end
 end
