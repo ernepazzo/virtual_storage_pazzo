@@ -38,6 +38,8 @@ es:
       product: 'Producto'
       category: 'Categoría'
       user: 'Usuario'
+      role: 'Roles'
+      permission: 'Permisos'
       entity_business: 'Empresa o Negocio'
       warehouse: 'Almacén'
       store: 'Tienda'

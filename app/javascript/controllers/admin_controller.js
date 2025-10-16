@@ -4,10 +4,6 @@ import {Controller} from "@hotwired/stimulus"
 import jQuery from "jquery"
 window.$ = window.jQuery = jQuery
 
-// 2️⃣ Importa librerías globales
-import toastr from "toastr"
-import * as bootstrap from "bootstrap"
-window.bootstrap = bootstrap
 
 // OverlayScrollbars JS
 import {OverlayScrollbars} from 'overlayscrollbars';

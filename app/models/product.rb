@@ -9,7 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :bigint           not null
-#  user_id     :bigint           not null
+#  user_id     :bigint
 #
 # Indexes
 #
@@ -19,7 +19,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (category_id => categories.id)
-#  fk_rails_...  (user_id => users_r.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class Product < ApplicationRecord
   include Favoritable
