@@ -17,7 +17,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (product_id => products.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (user_id => users_r.id)
 #
 class Favorite < ApplicationRecord
   validates :user, uniqueness: { scope: :product }
