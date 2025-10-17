@@ -37,9 +37,11 @@ class Admin::RoleController < ApplicationController
   end
 
   def index
+    is_granted('rol','show')
   end
 
   def new
+    is_granted('rol','create')
     @role = Role.new
     @permission = Permission.all.order('name ASC')
     @view = 'new'
@@ -51,6 +53,7 @@ class Admin::RoleController < ApplicationController
   end
 
   def create
+    is_granted('rol','create')
     @role = Role.new(role_params)
 
     if @role.save
@@ -65,6 +68,7 @@ class Admin::RoleController < ApplicationController
   end
 
   def edit
+    is_granted('rol','edit')
     role_access = RoleHasAccess.where(role_id: @role.id)
     role_access_permited = []
     @view = 'edit'
@@ -88,6 +92,7 @@ class Admin::RoleController < ApplicationController
   end
 
   def update
+    is_granted('rol','edit')
     if @role.update(role_params)
       @role.save_access_for_roles('edit')
 
@@ -121,6 +126,7 @@ class Admin::RoleController < ApplicationController
   end
 
   def destroy
+    is_granted('rol','delete')
     begin
       @role.destroy
       msg = 'Role eliminado.'
@@ -137,6 +143,7 @@ class Admin::RoleController < ApplicationController
   end
 
   def destroy_block
+    is_granted('rol','delete')
     count = 0
     errors = []
     params[:ids].each do |id|

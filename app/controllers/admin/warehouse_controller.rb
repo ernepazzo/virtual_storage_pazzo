@@ -46,18 +46,22 @@ class Admin::WarehouseController < ApplicationController
   end
 
   def index
+    is_granted('warehouse','show')
   end
 
   def show
+    is_granted('warehouse','show')
   end
 
   def new
+     is_granted('warehouse','create')
     @warehouse = Warehouse.new
     @url = admin_warehouse_create_path
     @url_method = 'POST'
   end
 
   def create
+     is_granted('warehouse','create')
     # unless current_user&.is_granted('role', 'create')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_path and return
@@ -78,6 +82,7 @@ class Admin::WarehouseController < ApplicationController
   end
 
   def edit
+     is_granted('warehouse','edit')
     # access_granted('admin_access', 'roles', 'edit')
 
     @url = admin_warehouse_update_path(id: @warehouse.id)
@@ -85,6 +90,7 @@ class Admin::WarehouseController < ApplicationController
   end
 
   def update
+     is_granted('warehouse','edit')
     @warehouse.attach_image_webp(params[:warehouse][:image]) if params[:warehouse][:image].present?
 
     if @warehouse.update(warehouse_params)
@@ -100,6 +106,7 @@ class Admin::WarehouseController < ApplicationController
   end
 
   def destroy
+     is_granted('warehouse','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return
@@ -121,6 +128,7 @@ class Admin::WarehouseController < ApplicationController
   end
 
   def destroy_block
+     is_granted('warehouse','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return

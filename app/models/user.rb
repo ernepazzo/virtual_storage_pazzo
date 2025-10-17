@@ -59,6 +59,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   belongs_to :role
+  attr_accessor :permissions
 
   validate :role_priority_cannot_decrease, on: :update
 

@@ -40,9 +40,11 @@ class Admin::PermissionController < ApplicationController
   end
 
   def index
+    is_granted('access','show')
   end
 
   def new
+    is_granted('access','create')
     @permission = Permission.new
     @view = 'new'
     @url = admin_permission_create_path
@@ -50,6 +52,7 @@ class Admin::PermissionController < ApplicationController
   end
 
   def create
+    is_granted('access','create')
     @permission = Permission.new(permission_params)
 
     if @permission.save
@@ -64,11 +67,13 @@ class Admin::PermissionController < ApplicationController
   end
 
   def edit
+    is_granted('access','edit')
     @url = admin_permission_update_path(id: @permission.id)
     @url_method = 'PUT'
   end
 
   def update
+    is_granted('access','edit')
     if @permission.update(permission_params)
       flash[:success] = 'Permiso modificado correctamente'
       redirect_to admin_permissions_path
@@ -80,6 +85,7 @@ class Admin::PermissionController < ApplicationController
   end
 
   def destroy
+    is_granted('access','delete')
     begin
       @permission.destroy
       msg = 'Permiso eliminado.'
@@ -96,6 +102,7 @@ class Admin::PermissionController < ApplicationController
   end
 
   def destroy_block
+    is_granted('access','delete')
     count = 0
     errors = []
     params[:ids].each do |id|

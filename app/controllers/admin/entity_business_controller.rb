@@ -45,18 +45,22 @@ class Admin::EntityBusinessController < ApplicationController
   end
 
   def index
+    is_granted('bussines_entity','show')
   end
 
   def show
+    is_granted('bussines_entity','show')
   end
 
   def new
+    is_granted('bussines_entity','create')
     @entity_business = EntityBusiness.new
     @url = admin_entity_business_create_path
     @url_method = 'POST'
   end
 
   def create
+    is_granted('bussines_entity','create')
     # unless current_user&.is_granted('role', 'create')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_path and return
@@ -77,6 +81,7 @@ class Admin::EntityBusinessController < ApplicationController
   end
 
   def edit
+    is_granted('bussines_entity','edit')
     # access_granted('admin_access', 'roles', 'edit')
 
     @url = admin_entity_business_update_path(id: @entity_business.id)
@@ -84,6 +89,7 @@ class Admin::EntityBusinessController < ApplicationController
   end
 
   def update
+    is_granted('bussines_entity','edit')
     @entity_business.attach_image_webp(params[:entity_business][:image]) if params[:entity_business][:image].present?
 
     if @entity_business.update(entity_business_params)
@@ -99,6 +105,7 @@ class Admin::EntityBusinessController < ApplicationController
   end
 
   def destroy
+    is_granted('bussines_entity','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return
@@ -120,6 +127,7 @@ class Admin::EntityBusinessController < ApplicationController
   end
 
   def destroy_block
+    is_granted('bussines_entity','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return

@@ -45,18 +45,22 @@ class Admin::ProductItemController < ApplicationController
   end
 
   def index
+    is_granted('product','show')
   end
 
   def show
+    is_granted('product','show')
   end
 
   def new
+    is_granted('product','create')
     @product_item = ProductItem.new
     @url = admin_product_item_create_path
     @url_method = 'POST'
   end
 
   def create
+    is_granted('product','create')
     # unless current_user&.is_granted('role', 'create')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_path and return
@@ -77,6 +81,7 @@ class Admin::ProductItemController < ApplicationController
   end
 
   def edit
+    is_granted('product','edit')
     # access_granted('admin_access', 'roles', 'edit')
 
     @url = admin_product_item_update_path(id: @product_item.id)
@@ -84,6 +89,7 @@ class Admin::ProductItemController < ApplicationController
   end
 
   def update
+    is_granted('product','edit')
     @product_item.attach_image_webp(params[:product_item][:image]) if params[:product_item][:image].present?
 
     if @product_item.update(product_item_params)
@@ -99,6 +105,7 @@ class Admin::ProductItemController < ApplicationController
   end
 
   def destroy
+    is_granted('product','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return
@@ -120,6 +127,7 @@ class Admin::ProductItemController < ApplicationController
   end
 
   def destroy_block
+    is_granted('product','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return

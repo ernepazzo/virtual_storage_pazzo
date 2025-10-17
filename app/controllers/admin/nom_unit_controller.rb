@@ -44,18 +44,22 @@ class Admin::NomUnitController < ApplicationController
   end
 
   def index
+    is_granted('unity','show')
   end
 
   def show
+    is_granted('unity','show')
   end
 
   def new
+    is_granted('unity','create')
     @nom_unit = NomUnit.new
     @url = admin_nom_unit_create_path
     @url_method = 'POST'
   end
 
   def create
+    is_granted('unity','create')
     # unless current_user&.is_granted('role', 'create')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_path and return
@@ -75,6 +79,7 @@ class Admin::NomUnitController < ApplicationController
   end
 
   def edit
+    is_granted('unity','edit')
     # access_granted('admin_access', 'roles', 'edit')
 
     @url = admin_nom_unit_update_path(id: @nom_unit.id)
@@ -82,6 +87,7 @@ class Admin::NomUnitController < ApplicationController
   end
 
   def update
+    is_granted('unity','edit')
     if @nom_unit.update(nom_unit_params)
       flash[:success] = "Unidad de Medida editada correctamente."
       redirect_to admin_nom_unit_path
@@ -95,6 +101,7 @@ class Admin::NomUnitController < ApplicationController
   end
 
   def destroy
+    is_granted('unity','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return
@@ -116,6 +123,7 @@ class Admin::NomUnitController < ApplicationController
   end
 
   def destroy_block
+    is_granted('unity','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return

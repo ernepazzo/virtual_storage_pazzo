@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "redirect" do %>
+  <% flash['success'] = session[:message] %>
+  <script type="text/javascript">
+      window.location.href = "/";
+  </script>
+ <% end %>

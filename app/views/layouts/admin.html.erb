@@ -532,6 +532,26 @@
   </footer>
   <!--end::Footer-->
 </div>
+
+
+<% if Rails.env == 'development' %>
+  <!--  PARA CUANDO ESTEMOS EN AMBIENTE DE DESARROLLO-->
+  <div id="current_user">
+    <span class="fa fa-user fa-3x"></span>
+    <div class="current_data">
+      <% if user_signed_in? %>
+        <h4 class="border-bottom">Usuario</h4>
+        <%= current_user.inspect %>
+        <h4 class="border-top border-bottom">Rol</h4>
+        <%= current_user.role.inspect %>
+        <h4 class="border-top border-bottom">Permisos</h4>
+        <%= current_user.permissions.inspect %>
+        <h4 class="border-top border-bottom">Intentos fallidos</h4>
+        <%= session[:failed_attempt] %>
+      <%end %>
+    </div>
+  </div>
+<% end %>
 <!--end::App Wrapper-->
 <!--begin::Script-->
 <!--begin::Third Party Plugin(OverlayScrollbars)-->
@@ -701,6 +721,7 @@
         <%end %>
     })
 </script>
+<%= turbo_frame_tag 'redirect' %>
 </body>
 <!--end::Body-->
 </html>

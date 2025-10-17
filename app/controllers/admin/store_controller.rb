@@ -46,18 +46,22 @@ class Admin::StoreController < ApplicationController
   end
 
   def index
+    is_granted('Store','show')
   end
 
   def show
+    is_granted('Store','show')
   end
 
   def new
+    is_granted('Store','create')
     @store = Store.new
     @url = admin_store_create_path
     @url_method = 'POST'
   end
 
   def create
+    is_granted('Store','create')
     # unless current_user&.is_granted('role', 'create')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_path and return
@@ -78,6 +82,7 @@ class Admin::StoreController < ApplicationController
   end
 
   def edit
+    is_granted('Store','edit')
     # access_granted('admin_access', 'roles', 'edit')
 
     @url = admin_store_update_path(id: @store.id)
@@ -85,6 +90,7 @@ class Admin::StoreController < ApplicationController
   end
 
   def update
+    is_granted('Store','edit')
     @store.attach_image_webp(params[:store][:image]) if params[:store][:image].present?
 
     if @store.update(store_params)
@@ -100,6 +106,7 @@ class Admin::StoreController < ApplicationController
   end
 
   def destroy
+    is_granted('Store','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return
@@ -121,6 +128,7 @@ class Admin::StoreController < ApplicationController
   end
 
   def destroy_block
+    is_granted('Store','delete')
     # unless current_user&.is_granted('user', 'delete')
     #   flash[:error] = 'No tienes acceso'
     #   redirect_to admin_user_path and return
