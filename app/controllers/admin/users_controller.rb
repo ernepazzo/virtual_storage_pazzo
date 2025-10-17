@@ -120,7 +120,7 @@ class Admin::UsersController < ApplicationController
     # Devise automáticamente encriptará la contraseña
     if @user.save
       # Opcional: enviar email de confirmación si usas confirmable
-      # @user.send_confirmation_instructions
+      @user.send_confirmation_instructions
 
       flash[:success] = 'Usuario creado'
       redirect_to admin_users_path
