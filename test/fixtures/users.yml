@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  admin                  :boolean
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime

@@ -1,13 +1,13 @@
 <%# <ul class="nav col-sm-12 col-lg-auto me-lg-auto mb-sm-2 justify-content-sm-center mb-md-0 d-flex flex-column gap-2 fs-3 mb-2"> %>
 <ul class="nav col-sm-12 col-lg-auto me-lg-auto mb-sm-2 justify-content-center mb-md-0 d-flex flex-column flex-sm-row text-sm-center">
-  <li><%= link_to t('.home'), root_path, class: "nav-link px-sm-2 text-white" if current_user&.admin? %>
+  <li><%= link_to t('.home'), root_path, class: "nav-link px-sm-2 text-white"  %> <!-- if current_user&.admin? -->
   </li>
-  <li><%= link_to t('.administration'), admin_path, class: "nav-link px-sm-2 text-white" if current_user&.admin? %>
+  <li><%= link_to t('.administration'), admin_path, class: "nav-link px-sm-2 text-white"  %> <!-- if current_user&.admin? -->
   </li>
   <li><%= link_to t('.products'), products_path, class: "nav-link px-sm-2 text-white" %></li>
   <li><%= link_to t('.new_product'), new_product_path, class: "nav-link px-sm-2 text-white", data: { turbo_frame: "modal" } if current_user %>
   </li>
-  <li><%= link_to t('.categories'), categories_path, class: "nav-link px-sm-2 text-white"  if current_user&.admin? %></li>
+  <li><%= link_to t('.categories'), categories_path, class: "nav-link px-sm-2 text-white"   %></li> <!-- if current_user&.admin? -->
   <li><%= link_to t('.favorites'), favorites_path, class: "nav-link px-sm-2 text-white"  if current_user %></li>
 </ul>
 

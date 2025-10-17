@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
 
   def is_admin?
-    unless current_user&.admin?
-      redirect_to root_path, alert: "Acceso denegado."
-    end
+    # unless current_user&.admin?
+    #   redirect_to root_path, alert: "Acceso denegado."
+    # end
   end
 
   def protect_pages

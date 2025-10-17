@@ -18,10 +18,6 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-  <div class="field">
-  <%= f.label :role_id %><br />
-  <%= f.select :role_id, options_for_select(Role.all.pluck(:role_type, :id)),{}, class: 'form-control' %>
-</div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

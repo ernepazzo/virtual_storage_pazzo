@@ -35,15 +35,24 @@
         <label class="small mb-1" for="text">Whatsapp:</label>
         <%= f.text_field :whatsapp, class: 'form-control' %>
       </div>
-      <div class="form-group mt-3">
-        <%= f.label :admin, class: 'small mb-1' do %>¿Admin?
-        <% end %>
-        <%= f.check_box :admin %>
-      </div>
+
       <div class="mb-3" data-controller="select2">
         <%= f.label :role_id, class: 'small mb-1' do %>Role
         <% end %>
-        <%= f.select :role_id, Role.where('priority >= ?', current_user.role.priority).collect { |t| [t.role_type, t.id] }, { prompt: "Seleccione una opción" }, class: "form-control c2ec_select_with_clear" %>
+        <%= f.select :role_id, Role.where('priority >= ?', current_user&.role&.priority || 1).collect { |t| [t.role_type, t.id] }, { prompt: "Seleccione una opción" }, class: "form-control c2ec_select_with_clear" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', required: true %>
+        <small class="form-text text-muted">
+          Mínimo <%= @user.class.password_length.min %> caracteres
+        </small>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
       </div>
 
       <div class="modal-footer mt-3">

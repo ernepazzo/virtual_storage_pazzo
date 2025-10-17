@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
       get '/users', to: 'users#index', as: 'users'
       get '/users/data', to: 'users#data', as: 'users_data'
+      get '/users/new', to: 'users#new', as: 'users_new'
+      post '/user', to: 'users#create', as: 'users_create'
       get '/users/:id/perfil', to: 'users#show', as: 'user_show'
       get '/users/:id/edit', to: 'users#edit', as: 'users_edit'
       post '/users/:id/update', to: 'users#update', as: 'users_update'

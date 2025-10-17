@@ -48,11 +48,8 @@ class Admin::UsersController < ApplicationController
       #            ''
       #          end
 
-      admin = if user.admin
-                '<span class="bi bi-check-lg text-success">'
-              else
-                '<span class="bi bi-x-lg text-danger">'
-              end
+      admin = '<span class="bi bi-check-lg text-success">'
+
 
       # commercial = if user.is_commercial
       #                '<span class="fa fa-check text-success">'
@@ -108,6 +105,29 @@ class Admin::UsersController < ApplicationController
   def show
   end
 
+  def new
+    @user = User.new
+    @view = 'new'
+    @url = admin_users_create_path
+    @url_method = 'POST'
+
+
+    render layout: false if turbo_frame_request?
+  end
+
+  def create
+    @user = User.new(user_params)
+    # Devise automáticamente encriptará la contraseña
+    if @user.save
+      # Opcional: enviar email de confirmación si usas confirmable
+      # @user.send_confirmation_instructions
+
+      flash[:success] = 'Usuario creado'
+      redirect_to admin_users_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
   def edit
     @url = admin_users_update_path(id: @user.id)
     @url_method = 'POST'
@@ -119,7 +139,7 @@ class Admin::UsersController < ApplicationController
     @url = admin_users_update_path(id: @user.id)
     @url_method = 'POST'
 
-    if @user.update(user_params)
+    if @user.update(user_edit_params)
       flash[:success] = "Usuario actualizado."
       redirect_to admin_users_path
     else
@@ -139,7 +159,14 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def user_params
-    params.require(:user).permit(:email, :whatsapp, :admin, :role_id, :image)
+  def user_create_params
+
   end
+  def user_params
+    params.require(:user).permit(:email, :whatsapp, :role_id, :image, :password, :password_confirmation)
+  end
+  def user_edit_params
+    params.require(:user).permit(:email, :whatsapp, :role_id, :image)
+  end
+
 end
