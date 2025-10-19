@@ -28,6 +28,7 @@ class Admin::ProductItemController < ApplicationController
         image: "<div style='text-align: center;'><img src='#{product_item.image.present? ? url_for(product_item.image) : url_for('/no_images_200_x_200.png')}' class='avatar img-fluid rounded me-1' alt=''></div>",
         name: product_item.name,
         code: product_item.code,
+        entity_business: product_item.entity_business&.name,
         description: product_item.description,
         action: "<div class='dropstart'>
                    <a class='btn btn-secondary dropdown-toggle btn-sm' href='#' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -152,6 +153,6 @@ class Admin::ProductItemController < ApplicationController
   end
 
   def product_item_params
-    params.require(:product_item).permit(:name, :code, :description)
+    params.require(:product_item).permit(:name, :code, :description, :entity_business_id)
   end
 end

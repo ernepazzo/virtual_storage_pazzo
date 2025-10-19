@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_17_014406) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_19_032220) do
   create_table "accesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.boolean "can_create", default: false
     t.boolean "can_edit", default: false
@@ -116,16 +116,18 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_17_014406) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "entity_business_id", null: false
+    t.index ["entity_business_id"], name: "index_product_items_on_entity_business_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.integer "price", null: false
-    t.bigint "category_id", null: false
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id", null: false
+    t.bigint "user_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
@@ -189,6 +191,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_17_014406) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "users_r", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "username", null: false
+    t.string "password_digest", null: false
+    t.string "whatsapp", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
+    t.string "country"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
   create_table "warehouses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "code", null: false
@@ -206,9 +221,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_17_014406) do
   add_foreign_key "cost_sheets", "nom_units", column: "storage_unit_id"
   add_foreign_key "cost_sheets", "product_items"
   add_foreign_key "favorites", "products"
-  add_foreign_key "favorites", "users"
+  add_foreign_key "favorites", "users_r", column: "user_id"
+  add_foreign_key "product_items", "entity_businesses"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "users"
+  add_foreign_key "products", "users_r", column: "user_id"
   add_foreign_key "role_has_accesses", "accesses"
   add_foreign_key "role_has_accesses", "roles"
   add_foreign_key "stores", "entity_businesses"

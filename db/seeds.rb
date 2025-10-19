@@ -6,7 +6,23 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# User.create(email: 'ernepazzo@virtualstoragepazzo.com', username: 'ernepazzo', password: '3rn3st1c0.V1rtu4lSt9r4g3P4zz0', whatsapp: 53867624, admin: true)
+if Permission.count == 0
+  permissions = [
+    { name: 'Usuarios', permission_type: 'user' },
+    { name: 'Empresas o Negocios', permission_type: 'entity_business' },
+    { name: 'Almacén', permission_type: 'warehouse' },
+    { name: 'Tiendas', permission_type: 'store' },
+    { name: 'Fichas de costo', permission_type: 'cost_sheet' },
+    { name: 'Productos', permission_type: 'product' },
+    { name: 'Unidades de medidas', permission_type: 'unity' },
+    { name: 'Roles', permission_type: 'rol' },
+    { name: 'Permisos', permission_type: 'access' }
+  ]
+
+  permissions.each do |perm|
+    Permission.create!(name: perm[:name], permission_type: perm[:permission_type])
+  end
+end
 if User.count == 0
   User.create!(
     email: 'ernepazzo1212@gmail.com',
