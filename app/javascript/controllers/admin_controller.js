@@ -74,6 +74,15 @@ export default class extends Controller {
         // 🔹 Color Mode Toggler
         // ======================================================
         this.initColorMode()
+
+        // ======================================================
+        // 🔹 Re-inicializar funcionalidad AdminLTE
+        // ======================================================
+        document.addEventListener("turbo:load", () => {
+            this.initAdminLTE()
+        })
+        // this.initAdminLTE()
+
     }
 
     // ======================================================
@@ -176,6 +185,26 @@ export default class extends Controller {
             })
         })
     }
+
+    // ======================================================
+    // 🔹 Re-inicializar funcionalidad AdminLTE
+    // ======================================================
+    initAdminLTE() {
+        // Re-asignar funcionalidad a los elementos con data-lte-toggle
+        document.querySelectorAll("[data-lte-toggle='sidebar']").forEach((el) => {
+            el.removeEventListener("click", this._toggleSidebar)
+            el.addEventListener("click", this._toggleSidebar)
+        })
+    }
+
+    _toggleSidebar(e) {
+        e.preventDefault()
+        const body = document.body
+        // Toggle manual del estado del sidebar
+        body.classList.toggle("sidebar-open")
+        body.classList.toggle("sidebar-collapse")
+    }
+
 
     delete(e) {
         bootbox.confirm({
