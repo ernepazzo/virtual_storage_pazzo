@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_17_014406) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_19_032220) do
   create_table "accesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.boolean "can_create", default: false
     t.boolean "can_edit", default: false
@@ -116,6 +116,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_17_014406) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "entity_business_id", null: false
+    t.index ["entity_business_id"], name: "index_product_items_on_entity_business_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -220,6 +222,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_17_014406) do
   add_foreign_key "cost_sheets", "product_items"
   add_foreign_key "favorites", "products"
   add_foreign_key "favorites", "users_r", column: "user_id"
+  add_foreign_key "product_items", "entity_businesses"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users_r", column: "user_id"
   add_foreign_key "role_has_accesses", "accesses"
