@@ -1,28 +1,20 @@
-import {Controller} from "@hotwired/stimulus"
-
-// 1️⃣ Importa jQuery globalmente
+import { Controller } from "@hotwired/stimulus"
 import jQuery from "jquery"
+import { OverlayScrollbars } from "overlayscrollbars"
+
 window.$ = window.jQuery = jQuery
-
-
-// OverlayScrollbars JS
-import {OverlayScrollbars} from 'overlayscrollbars';
 
 let obtenerIdCheckDatatable = () => {
     let array = []
-    let input = $('#table').find('input[type="checkbox"]');
+    let input = $('#table').find('input[type="checkbox"]')
     input.map(elem => {
-        let check = $(input[elem]);
-        if (check.is(':checked')) {
-            if (check.val() !== 'on') {
-                array.push(check.val());
-            }
+        let check = $(input[elem])
+        if (check.is(':checked') && check.val() !== 'on') {
+            array.push(check.val())
         }
-
     })
-    return array;
+    return array
 }
-
 
 export default class extends Controller {
     connect() {
@@ -32,22 +24,7 @@ export default class extends Controller {
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper"
         const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER)
 
-        /*if (sidebarWrapper && window.OverlayScrollbarsGlobal?.OverlayScrollbars) {
-            // evita reinicializar si ya está activo
-            if (!sidebarWrapper.dataset.scrollInit) {
-                this.scrollbar = OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-                    scrollbars: {
-                        theme: "os-theme-light",
-                        autoHide: "leave",
-                        clickScroll: true,
-                    },
-                })
-                sidebarWrapper.dataset.scrollInit = "true"
-                console.log("✅ OverlayScrollbars inicializado")
-            }
-        }*/
         if (sidebarWrapper && OverlayScrollbars) {
-            // evita reinicializar si ya está activo
             if (!sidebarWrapper.dataset.scrollInit) {
                 this.scrollbar = OverlayScrollbars(sidebarWrapper, {
                     scrollbars: {
@@ -65,24 +42,17 @@ export default class extends Controller {
         document.addEventListener("turbo:before-cache", () => this.destroyScroll())
 
         // ======================================================
-        // 🔹 Inicialización de tooltips y toasts
+        // 🔹 Inicialización de tooltips, toasts y color mode
         // ======================================================
         this.initTooltips()
         this.initToasts()
-
-        // ======================================================
-        // 🔹 Color Mode Toggler
-        // ======================================================
         this.initColorMode()
 
         // ======================================================
-        // 🔹 Re-inicializar funcionalidad AdminLTE
+        // 🔹 Re-inicializar AdminLTE al cargar Turbo
         // ======================================================
-        document.addEventListener("turbo:load", () => {
-            this.initAdminLTE()
-        })
+        document.addEventListener("turbo:load", () => this.initAdminLTE())
         // this.initAdminLTE()
-
     }
 
     // ======================================================
@@ -187,10 +157,9 @@ export default class extends Controller {
     }
 
     // ======================================================
-    // 🔹 Re-inicializar funcionalidad AdminLTE
+    // 🧩 Re-inicializar funcionalidad AdminLTE (sidebar)
     // ======================================================
     initAdminLTE() {
-        // Re-asignar funcionalidad a los elementos con data-lte-toggle
         document.querySelectorAll("[data-lte-toggle='sidebar']").forEach((el) => {
             el.removeEventListener("click", this._toggleSidebar)
             el.addEventListener("click", this._toggleSidebar)
@@ -200,41 +169,34 @@ export default class extends Controller {
     _toggleSidebar(e) {
         e.preventDefault()
         const body = document.body
-        // Toggle manual del estado del sidebar
         body.classList.toggle("sidebar-open")
         body.classList.toggle("sidebar-collapse")
     }
 
-
+    // ======================================================
+    // 🗑️ Eliminar elementos individuales
+    // ======================================================
     delete(e) {
         bootbox.confirm({
             title: 'Eliminar',
             message: "¿Seguro que desea eliminar este elemento?",
             buttons: {
-                confirm: {
-                    label: '<i class="bi bi-check-lg"></i> Aceptar',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: '<i class="bi bi-x-lg"></i> Cancelar',
-                    className: 'btn-secondary'
-                }
+                confirm: { label: '<i class="bi bi-check-lg"></i> Aceptar', className: 'btn-success' },
+                cancel: { label: '<i class="bi bi-x-lg"></i> Cancelar', className: 'btn-secondary' }
             },
             size: 'md',
-            callback: function (result) {
+            callback: (result) => {
                 if (result) {
                     $.ajax({
                         url: e.target.dataset.target,
-                        data: {
-                            format: 'json'
-                        },
+                        data: { format: 'json' },
                         type: 'GET',
-                        success: function (data) {
+                        success: (data) => {
                             if (data.success) {
-                                toastr.success(data.msg);
-                                $('#table').bootstrapTable('refresh');
+                                toastr.success(data.msg)
+                                $('#table').bootstrapTable('refresh')
                             } else {
-                                toastr.error(data.msg);
+                                toastr.error(data.msg)
                             }
                         }
                     })
@@ -243,58 +205,44 @@ export default class extends Controller {
         })
     }
 
+    // ======================================================
+    // 🧹 Eliminación masiva
+    // ======================================================
     blockDelete() {
-        let ids = obtenerIdCheckDatatable();
-
-        let count_id = ids.length;
-
-        console.info('mi info!!!!');
-        console.log(ids);
-        console.log(count_id);
+        let ids = obtenerIdCheckDatatable()
+        let count_id = ids.length
 
         if (count_id === 0) {
-            toastr.info('Debe seleccionar al menos un elemento de la tabla para eliminar', 'Información importante');
+            toastr.info('Debe seleccionar al menos un elemento de la tabla para eliminar', 'Información importante')
+            return
         }
 
-        if (count_id > 0) {
-            bootbox.confirm({
-                title: 'Eliminar',
-                message: `¿Seguro que desea eliminar estos ${count_id} elemento(s)?`,
-                buttons: {
-                    confirm: {
-                        label: '<i class="bi bi-check-lg"></i> Aceptar',
-                        className: 'btn-success'
-                    },
-                    cancel: {
-                        label: '<i class="bi bi-x-lg"></i> Cancelar',
-                        className: 'btn-secondary'
-                    }
-                },
-                size: 'md',
-                callback: function (result) {
-                    if (result) {
-                        $.ajax({
-                            url: `${location.href.split('?')[0]}/delete`,
-                            data: {
-                                format: 'json',
-                                ids: ids
-                            },
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            type: 'POST',
-                            success: function (data) {
-                                if (data.success) {
-                                    toastr.success(data.msg);
-                                    $('#table').bootstrapTable('refresh');
-                                } else {
-                                    toastr.error(data.msg);
-                                }
+        bootbox.confirm({
+            title: 'Eliminar',
+            message: `¿Seguro que desea eliminar estos ${count_id} elemento(s)?`,
+            buttons: {
+                confirm: { label: '<i class="bi bi-check-lg"></i> Aceptar', className: 'btn-success' },
+                cancel: { label: '<i class="bi bi-x-lg"></i> Cancelar', className: 'btn-secondary' }
+            },
+            size: 'md',
+            callback: (result) => {
+                if (result) {
+                    $.ajax({
+                        url: `${location.href.split('?')[0]}/delete`,
+                        data: { format: 'json', ids: ids },
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        type: 'POST',
+                        success: (data) => {
+                            if (data.success) {
+                                toastr.success(data.msg)
+                                $('#table').bootstrapTable('refresh')
+                            } else {
+                                toastr.error(data.msg)
                             }
-                        })
-                    }
+                        }
+                    })
                 }
-            })
-        }
+            }
+        })
     }
 }
