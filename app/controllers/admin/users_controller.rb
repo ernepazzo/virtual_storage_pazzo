@@ -100,15 +100,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    is_granted('user','show')
   end
 
   def show
-    is_granted('user','show')
   end
 
   def new
-    is_granted('user','create')
     @user = User.new
     @view = 'new'
     @url = admin_users_create_path
@@ -119,7 +116,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    is_granted('user','create')
     @user = User.new(user_params)
     # Devise automáticamente encriptará la contraseña
     if @user.save
@@ -133,7 +129,6 @@ class Admin::UsersController < ApplicationController
     end
   end
   def edit
-    is_granted('user','edit')
     @url = admin_users_update_path(id: @user.id)
     @url_method = 'POST'
 
@@ -141,7 +136,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    is_granted('user','edit')
     @url = admin_users_update_path(id: @user.id)
     @url_method = 'POST'
 

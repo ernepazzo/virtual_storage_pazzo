@@ -1,6 +1,7 @@
 class Admin::PermissionController < ApplicationController
   before_action :authenticate_user! # Opcional: solo usuarios logueados
   before_action :is_admin?
+  before_action :get_controllers_name, only: [:index, :load_permissions]
   before_action :set_permission, only: [:edit, :update, :destroy]
 
   layout 'admin'
@@ -39,12 +40,13 @@ class Admin::PermissionController < ApplicationController
 
   end
 
-  def index
-    is_granted('access','show')
+  def index;end
+
+  def load_permissions
+    binding.pry
   end
 
   def new
-    is_granted('access','create')
     @permission = Permission.new
     @view = 'new'
     @url = admin_permission_create_path
@@ -52,7 +54,6 @@ class Admin::PermissionController < ApplicationController
   end
 
   def create
-    is_granted('access','create')
     @permission = Permission.new(permission_params)
 
     if @permission.save
@@ -67,13 +68,11 @@ class Admin::PermissionController < ApplicationController
   end
 
   def edit
-    is_granted('access','edit')
     @url = admin_permission_update_path(id: @permission.id)
     @url_method = 'PUT'
   end
 
   def update
-    is_granted('access','edit')
     if @permission.update(permission_params)
       flash[:success] = 'Permiso modificado correctamente'
       redirect_to admin_permissions_path
@@ -85,7 +84,6 @@ class Admin::PermissionController < ApplicationController
   end
 
   def destroy
-    is_granted('access','delete')
     begin
       @permission.destroy
       msg = 'Permiso eliminado.'
@@ -102,7 +100,6 @@ class Admin::PermissionController < ApplicationController
   end
 
   def destroy_block
-    is_granted('access','delete')
     count = 0
     errors = []
     params[:ids].each do |id|
@@ -130,5 +127,23 @@ class Admin::PermissionController < ApplicationController
   # Only allow a list of trusted parameters through.
   def permission_params
     params.require(:permission).permit(:name, :permission_type)
+  end
+
+  def get_controllers_name
+    @controllers = []
+    controller_path = Rails.root.join('app', 'controllers', '**',"*_controller.rb")
+    controller_files = Dir[controller_path]
+    controller_files.map do |file|
+      filename = File.basename(file, '.rb')
+      filename = filename.gsub('_controller', '')
+      next if ['application',
+               "confirmations",
+               "omniauth",
+               "passwords",
+               "registrations",
+               "sessions",
+               "unlocks"].include?(filename)
+      @controllers << filename
+    end
   end
 end

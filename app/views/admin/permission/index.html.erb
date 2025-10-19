@@ -11,9 +11,9 @@
               <div id="toolbar">
                 <!--                <span style="font-size: 1.5em; font-weight: bold;margin-right: 10px;">Usuarios</span>-->
                 <%# if show_html('admin_access', 'users', 'create') %>
-                <%= link_to admin_permission_new_path, "data-controller": "turbo", class: "btn btn-primary" do %>
-                  <i class="bi bi-plus"></i>
-                  Nuevo permiso
+                <%= link_to admin_permissions_load_path, "", class: "btn btn-primary" do %>
+                  <i class="bi bi-upload"></i>
+                  Cargar permisos
                 <% end %>
                 <button type="button" class="btn btn-danger" data-action="click->admin#blockDelete">
                   <i class="bi bi-trash"></i>

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
 
   def is_admin?
-    unless current_user&.role&.admin_access?
+    if !current_user&.role&.admin_access? && Permission.all.count.positive?
       flash[:warning] = 'Usted no tiene permisos para ejecutar esta acción'
       redirect_to root_path, alert: 'Usted no tiene permisos para ejecutar esta acción'
     end
