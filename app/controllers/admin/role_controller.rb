@@ -1,6 +1,7 @@
 class Admin::RoleController < ApplicationController
   before_action :authenticate_user! # Opcional: solo usuarios logueados
   before_action :is_admin?
+  before_action :check_access, except: [:data]
   before_action :set_role, only: [:edit, :update, :destroy]
 
   layout 'admin'
@@ -13,8 +14,8 @@ class Admin::RoleController < ApplicationController
     roles.each do |rol|
 
       action = ''
-      action += "<a class='dropdown-item' href='#{admin_role_edit_url(id: rol.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>"
-      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_role_delete_path(id: rol.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_role_delete_path(id: rol.id)}'></span> Eliminar</a>" # if show_html('admin_access', 'users', 'delete')
+      action += "<a class='dropdown-item' href='#{admin_role_edit_url(id: rol.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" if show_html('edit')
+      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_role_delete_path(id: rol.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_role_delete_path(id: rol.id)}'></span> Eliminar</a>" if show_html('delete')
 
       rows.push(
         id: "<input type='checkbox' value='#{rol.id}' class='inputBtnDataTable'>",

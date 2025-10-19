@@ -8,7 +8,7 @@
             <div data-controller="dataTable">
               <div id="toolbar">
                 <!--                <span style="font-size: 1.5em; font-weight: bold;margin-right: 10px;">Usuarios</span>-->
-                <%# if show_html('admin_access', 'users', 'create') %>
+                <% if show_html('create') %>
                 <%= link_to admin_users_new_path, "data-controller": "turbo", class: "btn btn-primary" do %>
                   <i class="bi bi-plus"></i>
                   Nuevo Usuario
@@ -17,7 +17,7 @@
 <!--                  <i class="bi bi-trash"></i>-->
 <!--                  Eliminar-->
 <!--                </button>-->
-                <%# end %>
+                <% end %>
               </div>
               <table
                 id="table"

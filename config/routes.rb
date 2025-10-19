@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
       # PERMISSIONS
       get '/permission', to: 'permission#index', as: 'permissions'
-      get '/permission/load', to: 'permission#load_permissions', as: 'permissions_load'
+      get '/permission/load_permissions', to: 'permission#load_permissions', as: 'permissions_load'
       get '/permission/data', to: 'permission#data'
       get '/permission/new', to: 'permission#new', as: 'permission_new'
       post '/permission', to: 'permission#create', as: 'permission_create'

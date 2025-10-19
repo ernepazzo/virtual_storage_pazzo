@@ -1,7 +1,7 @@
 class Admin::CostSheetController < ApplicationController
   before_action :authenticate_user! # Opcional: solo usuarios logueados
   before_action :is_admin?
-
+  before_action :check_access, except: [:data]
   before_action :set_cost_sheet, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only: :destroy_block
   layout 'admin'
@@ -20,9 +20,9 @@ class Admin::CostSheetController < ApplicationController
     rows = []
     cost_sheets.each do |cost_sheet|
       action = ''
-      action += "<a class='dropdown-item' href='#{admin_cost_sheet_show_path(id: cost_sheet.id)}' data-controller='turbo'><span class='bi bi-eye text-info'></span> Mostrar</a>" # if show_html('admin_access', 'users', 'show')
-      action += "<a class='dropdown-item' href='#{admin_cost_sheet_edit_path(id: cost_sheet.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" # if show_html('admin_access', 'users', 'edit')
-      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_cost_sheet_delete_path(id: cost_sheet.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_cost_sheet_delete_path(id: cost_sheet.id)}'></span> Eliminar</a>" # if show_html('admin_access', 'users', 'delete')
+      action += "<a class='dropdown-item' href='#{admin_cost_sheet_show_path(id: cost_sheet.id)}' data-controller='turbo'><span class='bi bi-eye text-info'></span> Mostrar</a>" if show_html('show')
+      action += "<a class='dropdown-item' href='#{admin_cost_sheet_edit_path(id: cost_sheet.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" if show_html('edit')
+      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_cost_sheet_delete_path(id: cost_sheet.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_cost_sheet_delete_path(id: cost_sheet.id)}'></span> Eliminar</a>" if show_html('delete')
 
       # binding.pry
       rows.push(

@@ -10,10 +10,16 @@
             <div data-controller="dataTable">
               <div id="toolbar">
                 <!--                <span style="font-size: 1.5em; font-weight: bold;margin-right: 10px;">Usuarios</span>-->
-                <%# if show_html('admin_access', 'users', 'create') %>
-                <%= link_to admin_permissions_load_path, "", class: "btn btn-primary" do %>
-                  <i class="bi bi-upload"></i>
-                  Cargar permisos
+                <% if @show_load %>
+                  <a href="<%= admin_permissions_load_path %>" class="btn btn-primary" data-turbo="false">
+                    <i class="bi bi-upload"></i>
+                    Cargar permisos
+                  </a>
+                <% else %>
+                  <%= link_to admin_permission_new_path, "data-controller": "turbo", class: "btn btn-primary" do %>
+                    <i class="bi bi-plus"></i>
+                    Nuevo permiso
+                  <% end %>
                 <% end %>
                 <button type="button" class="btn btn-danger" data-action="click->admin#blockDelete">
                   <i class="bi bi-trash"></i>
@@ -34,10 +40,11 @@
                 <thead>
                 <tr>
                   <!--                  <th data-field="id" data-checkbox="true"></th>-->
-                  <th data-field="id" data-width="1" data-width-unit="%"><input id="checkBtn" type='checkbox' data-action="change->dataTable#checkUncheckAll"></th>
-                  <th data-field="name" >Nombre</th>
+                  <th data-field="id" data-width="1" data-width-unit="%">
+                    <input id="checkBtn" type='checkbox' data-action="change->dataTable#checkUncheckAll"></th>
+                  <th data-field="name">Nombre</th>
                   <th data-field="type" data-visible="true" data-switchable="false">Tipo</th>
-                 <th data-field="action" data-width="5" data-width-unit="%" data-visible="true" data-switchable="false" data-align="center"></th>
+                  <th data-field="action" data-width="5" data-width-unit="%" data-visible="true" data-switchable="false" data-align="center"></th>
                 </tr>
                 </thead>
               </table>

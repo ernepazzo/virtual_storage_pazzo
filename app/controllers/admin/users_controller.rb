@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!   # Opcional: solo usuarios logueados
   before_action :is_admin?
-
+  before_action :check_access, except: [:data]
   before_action :set_user, only: [:show, :edit, :update]
   layout 'admin'
 
@@ -18,9 +18,9 @@ class Admin::UsersController < ApplicationController
 
     users.each do |user|
       action = ''
-      action += "<a class='dropdown-item' href='/admin/users/#{user.id}/perfil' data-controller='turbo'><span class='bi bi-eye text-info'></span> Perfil</a>" # if show_html('admin_access', 'users', 'show')
-      action += "<a class='dropdown-item' href='/#{I18n.locale}/admin/users/#{user.id}/edit' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" # if show_html('admin_access', 'users', 'edit')
-      action += "<a class='dropdown-item' href='javascript:;' data-action='dataTable#delete' data-target='/admin/users/#{user.id}'><span class='bi bi-trash text-danger' data-action='dataTable#delete' data-target='/admin/users/#{user.id}'></span> Eliminar</a>" # if show_html('admin_access', 'users', 'delete')
+      action += "<a class='dropdown-item' href='/admin/users/#{user.id}/perfil' data-controller='turbo'><span class='bi bi-eye text-info'></span> Perfil</a>"  if show_html('show')
+      action += "<a class='dropdown-item' href='/#{I18n.locale}/admin/users/#{user.id}/edit' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>"  if show_html('edit')
+      action += "<a class='dropdown-item' href='javascript:;' data-action='dataTable#delete' data-target='/admin/users/#{user.id}'><span class='bi bi-trash text-danger' data-action='dataTable#delete' data-target='/admin/users/#{user.id}'></span> Eliminar</a>" if show_html('delete')
 
       # if show_html('admin_access', 'users', 'other')
       #   action += "<div class='dropdown-divider'></div>"

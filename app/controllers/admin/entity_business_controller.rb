@@ -1,7 +1,7 @@
 class Admin::EntityBusinessController < ApplicationController
   before_action :authenticate_user! # Opcional: solo usuarios logueados
   before_action :is_admin?
-
+  before_action :check_access, except: [:data]
   before_action :set_entity_business, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only: :destroy_block
   layout 'admin'
@@ -18,9 +18,9 @@ class Admin::EntityBusinessController < ApplicationController
     rows = []
     entity_businesses.each do |entity_business|
       action = ''
-      action += "<a class='dropdown-item' href='#{admin_entity_business_show_path(id: entity_business.id)}' data-controller='turbo'><span class='bi bi-eye text-info'></span> Mostrar</a>" # if show_html('admin_access', 'users', 'show')
-      action += "<a class='dropdown-item' href='#{admin_entity_business_edit_path(id: entity_business.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" # if show_html('admin_access', 'users', 'edit')
-      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_entity_business_delete_path(id: entity_business.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_entity_business_delete_path(id: entity_business.id)}'></span> Eliminar</a>" # if show_html('admin_access', 'users', 'delete')
+      action += "<a class='dropdown-item' href='#{admin_entity_business_show_path(id: entity_business.id)}' data-controller='turbo'><span class='bi bi-eye text-info'></span> Mostrar</a>" if show_html('show')
+      action += "<a class='dropdown-item' href='#{admin_entity_business_edit_path(id: entity_business.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" if show_html('edit')
+      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_entity_business_delete_path(id: entity_business.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_entity_business_delete_path(id: entity_business.id)}'></span> Eliminar</a>" if show_html('delete')
 
       # binding.pry
       rows.push(
@@ -45,11 +45,9 @@ class Admin::EntityBusinessController < ApplicationController
   end
 
   def index
-    is_granted('bussines_entity','show')
   end
 
   def show
-    is_granted('bussines_entity','show')
   end
 
   def new
@@ -79,8 +77,6 @@ class Admin::EntityBusinessController < ApplicationController
   end
 
   def edit
-    # access_granted('admin_access', 'roles', 'edit')
-
     @url = admin_entity_business_update_path(id: @entity_business.id)
     @url_method = 'PUT'
   end

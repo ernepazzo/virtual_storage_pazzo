@@ -1,6 +1,7 @@
 class Admin::PermissionController < ApplicationController
   before_action :authenticate_user! # Opcional: solo usuarios logueados
   before_action :is_admin?
+  before_action :check_access, except: [:data]
   before_action :get_controllers_name, only: [:index, :load_permissions]
   before_action :set_permission, only: [:edit, :update, :destroy]
 
@@ -18,8 +19,8 @@ class Admin::PermissionController < ApplicationController
     rows = []
     permision.each do |p|
       action = ''
-      action += "<a class='dropdown-item' href='#{admin_permission_edit_path(id: p.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>"
-      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_permission_delete_path(id: p.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_permission_delete_path(id: p.id)}'></span> Eliminar</a>" # if show_html('admin_access', 'users', 'delete')
+      action += "<a class='dropdown-item' href='#{admin_permission_edit_path(id: p.id)}' data-controller='turbo'><span class='bi bi-pencil text-warning'></span> Editar</a>" if show_html('edit')
+      action += "<a class='dropdown-item' href='javascript:;' data-action='admin#delete' data-target='#{admin_permission_delete_path(id: p.id)}'><span class='bi bi-trash text-danger' data-action='admin#delete' data-target='#{admin_permission_delete_path(id: p.id)}'></span> Eliminar</a>" if show_html('delete')
       rows.push(
         id: "<input type='checkbox' value='#{p.id}' class='inputBtnDataTable'>",
         name: p.name,
@@ -40,10 +41,21 @@ class Admin::PermissionController < ApplicationController
 
   end
 
-  def index;end
+  def index
+
+    @show_load = !@controllers.to_set.subset?(Permission.all.pluck(:permission_type).to_set)
+  end
 
   def load_permissions
-    binding.pry
+    if @controllers.any?
+      @controllers.each do |controller|
+        Permission.find_or_create_by(name: controller.gsub('_', ' ').capitalize, permission_type: controller)
+      end
+      flash[:success] = 'Permisos cargados correctamente'
+    else
+      flash[:warning] = 'No se encontraron permisos para cargar'
+    end
+    redirect_to admin_permissions_path
   end
 
   def new
@@ -119,6 +131,7 @@ class Admin::PermissionController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_permission
     @permission = Permission.find(params[:id])
@@ -131,7 +144,7 @@ class Admin::PermissionController < ApplicationController
 
   def get_controllers_name
     @controllers = []
-    controller_path = Rails.root.join('app', 'controllers', '**',"*_controller.rb")
+    controller_path = Rails.root.join('app', 'controllers', 'admin', '**', "*_controller.rb")
     controller_files = Dir[controller_path]
     controller_files.map do |file|
       filename = File.basename(file, '.rb')
