@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_19_032220) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_19_212620) do
   create_table "accesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.boolean "can_create", default: false
     t.boolean "can_edit", default: false
@@ -49,6 +49,30 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_19_032220) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "product_item_id", null: false
+    t.bigint "cost_sheet_id", null: false
+    t.integer "quantity", default: 0
+    t.decimal "unit_price", precision: 12, scale: 2, default: "0.0"
+    t.decimal "total_price", precision: 12, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["cost_sheet_id"], name: "index_cart_items_on_cost_sheet_id"
+    t.index ["product_item_id"], name: "index_cart_items_on_product_item_id"
+  end
+
+  create_table "carts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "entity_business_id", null: false
+    t.decimal "total", precision: 12, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_business_id"], name: "index_carts_on_entity_business_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -150,6 +174,30 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_19_032220) do
     t.boolean "is_default", default: false
   end
 
+  create_table "sale_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "sale_id", null: false
+    t.bigint "product_item_id", null: false
+    t.integer "quantity", default: 1
+    t.decimal "unit_price", precision: 12, scale: 2, default: "0.0"
+    t.decimal "total_price", precision: 12, scale: 2, default: "0.0"
+    t.decimal "cost_price", precision: 12, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_item_id"], name: "index_sale_items_on_product_item_id"
+    t.index ["sale_id"], name: "index_sale_items_on_sale_id"
+  end
+
+  create_table "sales", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "entity_business_id", null: false
+    t.decimal "total", precision: 12, scale: 2, default: "0.0"
+    t.decimal "cost_total", precision: 12, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_business_id"], name: "index_sales_on_entity_business_id"
+    t.index ["user_id"], name: "index_sales_on_user_id"
+  end
+
   create_table "stores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "code", null: false
@@ -217,6 +265,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_19_032220) do
   add_foreign_key "accesses", "permissions"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "cost_sheets"
+  add_foreign_key "cart_items", "product_items"
+  add_foreign_key "carts", "entity_businesses"
+  add_foreign_key "carts", "users"
   add_foreign_key "cost_sheets", "nom_units", column: "sale_unit_id"
   add_foreign_key "cost_sheets", "nom_units", column: "storage_unit_id"
   add_foreign_key "cost_sheets", "product_items"
@@ -227,6 +280,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_19_032220) do
   add_foreign_key "products", "users_r", column: "user_id"
   add_foreign_key "role_has_accesses", "accesses"
   add_foreign_key "role_has_accesses", "roles"
+  add_foreign_key "sale_items", "product_items"
+  add_foreign_key "sale_items", "sales"
+  add_foreign_key "sales", "entity_businesses"
+  add_foreign_key "sales", "users"
   add_foreign_key "stores", "entity_businesses"
   add_foreign_key "users", "roles"
   add_foreign_key "warehouses", "entity_businesses"

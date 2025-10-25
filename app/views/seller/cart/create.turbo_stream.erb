@@ -1,0 +1,27 @@
+<%= turbo_stream.replace "cart" do %>
+  <%= render "seller/cart/cart", cart: @cart %>
+<% end %>
+
+<%= turbo_stream.append "flash" do %>
+  <div class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3 shadow"
+       style="z-index: 9999; animation: fadeInDown 0.4s;">
+    <i class="bi bi-cart-plus me-2"></i> Producto agregado al carrito
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<% end %>
+
+<style>
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    // Animación de highlight al actualizar el carrito
+    const cartEl = document.getElementById("cart");
+    if (cartEl) {
+        cartEl.classList.add("animate-highlight");
+        setTimeout(() => cartEl.classList.remove("animate-highlight"), 800);
+    }
+</script>

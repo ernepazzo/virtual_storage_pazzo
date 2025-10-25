@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+  <title><%= t('app_name') %> | Punto de Venta</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "admin", "data-turbo-track": "reload" %>
+</head>
+
+<body class="layout-fixed bg-body-tertiary" data-controller="seller" style="overflow-x: hidden;">
+<div class="app-wrapper">
+  <!-- Encabezado -->
+  <nav class="app-header navbar navbar-expand bg-primary navbar-dark">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+<!--      <h4 class="text-white m-0 fw-bold">💼 Punto de Venta - <%#= current_user.entity_business.name %></h4>-->
+      <h4 class="text-white m-0 fw-bold">💼 Punto de Venta - <%= EntityBusiness.first.name %></h4>
+      <ul class="navbar-nav">
+        <li><%= link_to t('shared.items.home'), root_path, class: "nav-link text-white" %></li>
+        <li><%= link_to t('shared.items.administration'), admin_path, class: "nav-link text-white" %></li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <%= link_to logout_path, data: { turbo_method: :delete }, class: "btn btn-outline-light btn-sm" do %>
+          <i class="bi bi-box-arrow-right"></i> Salir
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenido -->
+  <main class="app-main container-fluid py-3">
+    <div id="flash"></div>
+    <%= yield %>
+  </main>
+</div>
+</body>
+</html>

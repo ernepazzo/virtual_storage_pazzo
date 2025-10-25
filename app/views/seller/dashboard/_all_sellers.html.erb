@@ -1,0 +1,11 @@
+<ul class="list-group list-group-flush" id="all-sellers">
+  <% @all_products.each do |p| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <%= p.name %>
+      <span class="badge bg-info">Precio de costo: <%= number_to_currency((p.sale_price_cents / 100), unit: p.sale_price_currency, separator: ',', format: '%u %n') %></span>
+      <span class="badge bg-success">Precio de venta: <%= number_to_currency((p.cost_price_cents / 100), unit: p.cost_price_currency, separator: ',', format: '%u %n') %></span>
+      <span class="badge bg-primary"># productos: <%= p.total_quantity_sold %></span>
+      <span class="badge bg-primary"># ventas: <%= p.sales_count %></span>
+    </li>
+  <% end %>
+</ul>

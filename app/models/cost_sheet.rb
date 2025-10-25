@@ -34,6 +34,7 @@
 class CostSheet < ApplicationRecord
   belongs_to :product_item
   belongs_to :source, polymorphic: true
+  has_many :cart_items
 
   belongs_to :store, foreign_key: 'source_id', optional: true
   belongs_to :warehouse, foreign_key: 'source_id', optional: true

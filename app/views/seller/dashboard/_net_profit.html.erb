@@ -1,0 +1,7 @@
+<div class="card text-center shadow-sm bg-info-subtle border-0" id="net-profit">
+  <div class="card-body">
+    <h6>Ganancia Neta</h6>
+    <!--        <h3 class="fw-bold text-info"><%#= number_to_currency(@daily_profit) %></h3>-->
+    <h3 class="fw-bold text-info"><%= number_to_currency(@daily_profit, unit: '$', separator: ',', format: '%u%n') %></h3>
+  </div>
+</div>

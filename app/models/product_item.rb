@@ -22,4 +22,6 @@ class ProductItem < ApplicationRecord
   include Imagen
 
   belongs_to :entity_business
+  has_many :cart_items
+  has_many :cost_sheets
 end

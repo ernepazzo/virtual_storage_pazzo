@@ -1,0 +1,7 @@
+<div class="card text-center shadow-sm bg-success-subtle border-0" id="day-sales">
+  <div class="card-body">
+    <h6>Ventas del Día</h6>
+    <!--        <h3 class="fw-bold text-success"><%#= number_to_currency(@daily_sales_total) %></h3>-->
+    <h3 class="fw-bold text-info"><%= number_to_currency(@daily_sales_total, unit: '$', separator: ',', format: '%u%n') %></h3>
+  </div>
+</div>

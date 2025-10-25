@@ -14,6 +14,8 @@ require "image_processing/mini_magick"
 class EntityBusiness < ApplicationRecord
   include Imagen
 
+  has_many :product_items
+
   validates :name, presence: {
     message: lambda do |object, data|
       "El nombre de la Empresa o Negocio no puede estar vacío."

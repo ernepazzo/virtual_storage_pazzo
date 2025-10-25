@@ -1,0 +1,81 @@
+<div class="row mb-4" data-controller="cart">
+  <div class="col-md-3">
+    <%= render "seller/dashboard/day_sales", daily_sales_total: @daily_sales_total %>
+  </div>
+
+  <div class="col-md-3">
+    <%= render "seller/dashboard/net_profit", daily_profit: @daily_profit %>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="fw-bold">Productos más vendidos en el día</h6>
+        <%= render "seller/dashboard/best_sellers", top_products: @top_products %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Productos -->
+  <div class="col-md-8">
+    <div class="row g-3">
+      <% if @products.any? %>
+        <% @products.each do |product| %>
+          <% cs = product.cost_sheets.last %>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card h-100 shadow-sm border-0">
+              <%#= image_tag(url product.image || "placeholder.png", class: "card-img-top", style: "height:120px; object-fit:cover;") %>
+              <div class="row">
+                <div class="col-12 col-md-12 d-flex justify-content-center align-items-center">
+                  <% if product.image.present? %>
+                    <%= image_tag product.image, class: "image-upload" %>
+                  <% else %>
+                    <img data-image-preview-target="preview" class="image-upload" src="/unknown.webp" alt="unknown">
+                  <% end %>
+                </div>
+              </div>
+              <div class="card-body text-center">
+                <h6 class="fw-bold text-truncate"><%= product.name %></h6>
+                <!--                <p class="text-muted mb-2">Precio: <%#= number_to_currency(cs&.sale_price_cents / 100 || 0) %></p>-->
+                <p class="text-muted mb-2">Precio: <%= number_to_currency((cs&.sale_price_cents / 100 || 0), unit: '$', separator: ',', format: '%u%n') %></p>
+                <form data-controller="cart" data-action="submit->cart#add">
+                  <input type="hidden" name="product_item_id" value="<%= product.id %>">
+                  <input type="hidden" name="cost_sheet_id" value="<%= cs&.id %>">
+                  <input type="number" name="quantity" value="1" min="1" class="form-control form-control-sm mb-2 text-center">
+                  <%= button_to seller_cart_index_path(product_item_id: product.id,
+                                                       cost_sheet_id: cs.id,
+                                                       quantity: 1),
+                                data: { turbo_method: :post, turbo_stream: true },
+                                class: "btn btn-sm btn-primary" do %>
+                    <i class="bi bi-cart-plus"></i> Agregar
+                  <% end %>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <h5>No hay productos en el almacén</h5>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Carrito lateral -->
+  <div class="col-md-4">
+    <%= render "seller/cart/cart", cart: @cart %>
+  </div>
+</div>
+
+<hr class="mt-5">
+<div class="row my-3">
+  <div class="col-12">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="fw-bold">Productos vendidos en el día</h6>
+        <%= render "seller/dashboard/all_sellers", all_products: @all_products %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,26 @@
   display: none !important;
 }
 
+/* ✨ Animaciones suaves para Turbo Streams */
+@keyframes highlight {
+    0%   { background-color: rgba(255, 255, 0, 0.4); }
+    100% { background-color: transparent; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0.7; transform: scale(0.98); }
+}
+
+.animate-highlight {
+    animation: highlight 0.8s ease-in-out;
+}
+
+.animate-fadeout {
+    animation: fadeout 0.6s ease-in-out;
+}
+
+
 /* Botón de Whatsapp "Text me" */
 #button_send_whatsapp {
   background-color: #fff;

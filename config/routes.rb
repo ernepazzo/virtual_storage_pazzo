@@ -132,5 +132,13 @@ Rails.application.routes.draw do
     resources :users, only: :show, path: '/user', param: :username
     resources :categories, except: :show
     resources :products # para k empiece en '/' es ",path: '/'"
+
+
+    namespace :seller, path: :seller do
+      get '/', to: 'dashboard#index', as: :dashboard
+      resources :cart, only: [:index, :create, :update, :destroy]
+      resources :sales, only: [:index, :create, :show]
+    end
+
   end
 end

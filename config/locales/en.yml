@@ -9,6 +9,7 @@ en:
     items:
       home: 'Home'
       administration: 'Administration'
+      seller: 'Seller'
       products: 'Products'
       new_product: 'New Product'
       categories: 'Categories'

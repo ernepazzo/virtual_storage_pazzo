@@ -9,6 +9,7 @@ es:
     items:
       home: 'Inicio'
       administration: 'Administración'
+      seller: 'Vendedor'
       products: 'Productos'
       new_product: 'Añadir Producto'
       categories: 'Categorías'
